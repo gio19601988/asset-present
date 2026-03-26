@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetFlow Studio — ძირითადი საშუალებების ERP სისტემა</title>
+  <meta name="description" content="AssetFlow Studio v2.0 — ძირითადი საშუალებების აღრიცხვის სრული ERP სისტემა. React 19, .NET Core 8, SQL Server.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+    :root {
+      --bg-primary: #0a0f1e;
+      --bg-secondary: #0f1629;
+      --bg-card: #141b30;
+      --bg-card-hover: #1a2340;
+      --accent-cyan: #00d4ff;
+      --accent-blue: #4d7cff;
+      --accent-purple: #8b5cf6;
+      --accent-green: #10b981;
+      --accent-orange: #f59e0b;
+      --accent-pink: #ec4899;
+      --accent-red: #ef4444;
+      --text-primary: #e8ecf4;
+      --text-secondary: #8892a8;
+      --text-muted: #4a5568;
+      --border-subtle: rgba(255,255,255,0.06);
+      --glow-cyan: 0 0 40px rgba(0,212,255,0.15);
+      --glow-blue: 0 0 40px rgba(77,124,255,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans Georgian', 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── Noise overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 3px; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 2rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s;
+    }
+
+    nav.scrolled { background: rgba(10,15,30,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--accent-cyan); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-cyan);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-version {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text-secondary); transition: all 0.3s; border-radius: 2px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 2rem 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(0,212,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(77,124,255,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 70%, rgba(139,92,246,0.05) 0%, transparent 50%);
+    }
+
+    /* Animated grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%,100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 20s ease-in-out infinite;
+    }
+    .orb-1 { width: 400px; height: 400px; background: rgba(0,212,255,0.07); top: 10%; left: -5%; animation-delay: 0s; }
+    .orb-2 { width: 350px; height: 350px; background: rgba(139,92,246,0.06); bottom: 20%; right: -5%; animation-delay: -7s; }
+    .orb-3 { width: 250px; height: 250px; background: rgba(77,124,255,0.05); top: 50%; left: 50%; animation-delay: -14s; }
+
+    @keyframes float {
+      0%,100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.12);
+      padding: 8px 20px;
+      border-radius: 30px;
+      margin-bottom: 2.5rem;
+      letter-spacing: 1px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', 'Noto Sans Georgian', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease-out 0.15s both;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats row */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out 0.45s both;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.8rem 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .stat-card:hover {
+      border-color: rgba(0,212,255,0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--glow-cyan);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .stat-card:hover::before { opacity: 1; }
+
+    .stat-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── Section base ─── */
+    section {
+      padding: 100px 2rem;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Outfit', 'Noto Sans Georgian', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 1rem auto 0;
+      line-height: 1.7;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ─── Modules Grid ─── */
+    #modules { background: var(--bg-secondary); }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: default;
+    }
+    .module-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .module-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.3rem;
+      position: relative;
+    }
+
+    .module-card:nth-child(1) .module-icon { background: rgba(77,124,255,0.12); color: var(--accent-blue); }
+    .module-card:nth-child(2) .module-icon { background: rgba(139,92,246,0.12); color: var(--accent-purple); }
+    .module-card:nth-child(3) .module-icon { background: rgba(16,185,129,0.12); color: var(--accent-green); }
+    .module-card:nth-child(4) .module-icon { background: rgba(245,158,11,0.12); color: var(--accent-orange); }
+    .module-card:nth-child(5) .module-icon { background: rgba(236,72,153,0.12); color: var(--accent-pink); }
+    .module-card:nth-child(6) .module-icon { background: rgba(239,68,68,0.12); color: var(--accent-red); }
+    .module-card:nth-child(7) .module-icon { background: rgba(0,212,255,0.12); color: var(--accent-cyan); }
+    .module-card:nth-child(8) .module-icon { background: rgba(16,185,129,0.12); color: var(--accent-green); }
+    .module-card:nth-child(9) .module-icon { background: rgba(77,124,255,0.12); color: var(--accent-blue); }
+
+    .module-card:nth-child(1):hover { box-shadow: 0 10px 40px rgba(77,124,255,0.1); }
+    .module-card:nth-child(2):hover { box-shadow: 0 10px 40px rgba(139,92,246,0.1); }
+    .module-card:nth-child(3):hover { box-shadow: 0 10px 40px rgba(16,185,129,0.1); }
+    .module-card:nth-child(4):hover { box-shadow: 0 10px 40px rgba(245,158,11,0.1); }
+    .module-card:nth-child(5):hover { box-shadow: 0 10px 40px rgba(236,72,153,0.1); }
+    .module-card:nth-child(6):hover { box-shadow: 0 10px 40px rgba(239,68,68,0.1); }
+    .module-card:nth-child(7):hover { box-shadow: 0 10px 40px rgba(0,212,255,0.1); }
+    .module-card:nth-child(8):hover { box-shadow: 0 10px 40px rgba(16,185,129,0.1); }
+    .module-card:nth-child(9):hover { box-shadow: 0 10px 40px rgba(77,124,255,0.1); }
+
+    .module-card .corner-glow {
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .module-card:hover .corner-glow { opacity: 1; }
+    .module-card:nth-child(1) .corner-glow { background: radial-gradient(circle, rgba(77,124,255,0.06), transparent 70%); }
+    .module-card:nth-child(2) .corner-glow { background: radial-gradient(circle, rgba(139,92,246,0.06), transparent 70%); }
+    .module-card:nth-child(3) .corner-glow { background: radial-gradient(circle, rgba(16,185,129,0.06), transparent 70%); }
+    .module-card:nth-child(4) .corner-glow { background: radial-gradient(circle, rgba(245,158,11,0.06), transparent 70%); }
+    .module-card:nth-child(5) .corner-glow { background: radial-gradient(circle, rgba(236,72,153,0.06), transparent 70%); }
+    .module-card:nth-child(6) .corner-glow { background: radial-gradient(circle, rgba(239,68,68,0.06), transparent 70%); }
+    .module-card:nth-child(7) .corner-glow { background: radial-gradient(circle, rgba(0,212,255,0.06), transparent 70%); }
+    .module-card:nth-child(8) .corner-glow { background: radial-gradient(circle, rgba(16,185,129,0.06), transparent 70%); }
+    .module-card:nth-child(9) .corner-glow { background: radial-gradient(circle, rgba(77,124,255,0.06), transparent 70%); }
+
+    .module-card h3 {
+      font-family: 'Outfit', 'Noto Sans Georgian', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .module-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .module-features {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .module-features span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── Features Detail ─── */
+    #features { background: var(--bg-primary); }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.03), transparent 60%);
+      pointer-events: none;
+    }
+
+    .feature-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    .feature-code .keyword { color: var(--accent-purple); }
+    .feature-code .type { color: var(--accent-cyan); }
+    .feature-code .string { color: var(--accent-green); }
+    .feature-code .comment { color: var(--text-muted); font-style: italic; }
+    .feature-code .method { color: var(--accent-blue); }
+    .feature-code .number { color: var(--accent-orange); }
+
+    .feature-text h3 {
+      font-family: 'Outfit', 'Noto Sans Georgian', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+    .feature-text p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .feature-text .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .feature-text .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+    .feature-text .check-list li::before {
+      content: '✓';
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── Tech Stack ─── */
+    #stack { background: var(--bg-secondary); }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stack-column {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .stack-column::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+    }
+    .stack-column:nth-child(1)::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+    .stack-column:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
+    .stack-column:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+
+    .stack-column h3 {
+      font-family: 'Outfit', 'Noto Sans Georgian', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stack-column h3 .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .stack-column:nth-child(1) h3 .dot { background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
+    .stack-column:nth-child(2) h3 .dot { background: var(--accent-purple); box-shadow: 0 0 10px var(--accent-purple); }
+    .stack-column:nth-child(3) h3 .dot { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+
+    .stack-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .stack-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    .stack-list li:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border-subtle);
+    }
+    .stack-list li .tech-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .stack-column:nth-child(1) .tech-icon { background: rgba(77,124,255,0.1); color: var(--accent-blue); }
+    .stack-column:nth-child(2) .tech-icon { background: rgba(139,92,246,0.1); color: var(--accent-purple); }
+    .stack-column:nth-child(3) .tech-icon { background: rgba(16,185,129,0.1); color: var(--accent-green); }
+
+    /* ─── Architecture diagram ─── */
+    #architecture { background: var(--bg-primary); }
+
+    .arch-visual {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 3rem;
+      position: relative;
+    }
+
+    .arch-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .arch-layer {
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .arch-layer-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .arch-layer:nth-child(1) { background: rgba(77,124,255,0.04); }
+    .arch-layer:nth-child(1) .arch-layer-label { color: var(--accent-blue); }
+    .arch-layer:nth-child(2) { background: rgba(139,92,246,0.04); }
+    .arch-layer:nth-child(2) .arch-layer-label { color: var(--accent-purple); }
+    .arch-layer:nth-child(3) { background: rgba(16,185,129,0.04); }
+    .arch-layer:nth-child(3) .arch-layer-label { color: var(--accent-green); }
+
+    .arch-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .arch-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .arch-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-primary);
+    }
+
+    .arch-connector {
+      display: flex;
+      justify-content: center;
+      padding: 0.3rem 0;
+    }
+    .arch-connector svg { opacity: 0.3; }
+
+    /* ─── Footer ─── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+    }
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .footer-tech {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Scroll animations ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 1024px) {
+      .modules-grid { grid-template-columns: repeat(2, 1fr); }
+      .stack-grid { grid-template-columns: 1fr; }
+      .feature-row { grid-template-columns: 1fr; gap: 2rem; }
+      .feature-row.reverse { direction: ltr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { 
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10,15,30,0.98);
+        padding: 1.5rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .nav-version { display: none; }
+
+      .hero { padding: 100px 1.2rem 60px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .modules-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 1.2rem; }
+
+      .arch-visual { padding: 1.5rem; }
+      .arch-items { gap: 6px; }
+      .arch-item { font-size: 0.68rem; padding: 5px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">AssetFlow Studio</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#modules">მოდულები</a></li>
+      <li><a href="#features">ფუნქციონალი</a></li>
+      <li><a href="#stack">ტექნოლოგიები</a></li>
+      <li><a href="#architecture">არქიტექტურა</a></li>
+    </ul>
+    <span class="nav-version">v2.0</span>
+    <button class="hamburger" id="hamburger" aria-label="მენიუ">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Version 2.0 • მარტი 2026</div>
+      <h1><span class="gradient">AssetFlow</span> Studio</h1>
+      <p class="hero-subtitle">ძირითადი საშუალებების აღრიცხვის სრული ERP სისტემა — აქტივების მართვა, ინვენტარიზაცია, ამორტიზაცია, შეკვეთები და RBAC უსაფრთხოება ერთ პლატფორმაზე</p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number" data-target="50000">0</div>
+          <div class="stat-label">აქტივები</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="25">0</div>
+          <div class="stat-label">ცხრილები</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="80">0</div>
+          <div class="stat-label">API-ები</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="115">0</div>
+          <div class="stat-label">კომპონენტები</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modules -->
+  <section id="modules">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">სისტემის მოდულები</div>
+        <h2 class="section-title">სრული ERP პლატფორმა</h2>
+        <p class="section-subtitle">9 ინტეგრირებული მოდული, რომელიც ფარავს ძირითადი საშუალებების მართვის ყველა ასპექტს</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- 1 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📦</div>
+          <h3>აქტივების მართვა</h3>
+          <p>მრავალნაწილიანი ფორმა 7 სექციით — ფინანსური, კლასიფიკაცია, ამორტიზაცია და Bulk ოპერაციები</p>
+          <div class="module-features">
+            <span>AssetForm</span>
+            <span>BulkActions</span>
+            <span>ExtendLife</span>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📋</div>
+          <h3>ინვენტარიზაცია</h3>
+          <p>სრული პროცესის ავტომატიზაცია — კამერა, Barcode სკანერი, დისკრეპანსიების აღმოჩენა</p>
+          <div class="module-features">
+            <span>ZXing</span>
+            <span>HTML5 Camera</span>
+            <span>Excel Export</span>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">🏭</div>
+          <h3>საწყობის მართვა</h3>
+          <p>მრავალსაწყობიანი სისტემა — შემოსვლა, გასვლა, გადატანა, დაბრუნება და რეალურ დროში მარაგი</p>
+          <div class="module-features">
+            <span>Multi-warehouse</span>
+            <span>Movements</span>
+            <span>Stock</span>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📉</div>
+          <h3>ამორტიზაცია</h3>
+          <p>Straight-Line, Declining Balance, Units of Production და Custom მეთოდები</p>
+          <div class="module-features">
+            <span>DepreciationHistory</span>
+            <span>Batch</span>
+            <span>PDF Export</span>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">🛒</div>
+          <h3>შეკვეთები</h3>
+          <p>სრული Workflow — Draft, Pending, Approved, In Progress, Completed ციკლით</p>
+          <div class="module-features">
+            <span>Workflow</span>
+            <span>Documents</span>
+            <span>Comments</span>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📞</div>
+          <h3>ლიდები & ქოლცენტრი</h3>
+          <p>CRM მოდული — Excel იმპორტი, აგენტის დაშბორდი, სტატისტიკა და რეალურ დროში მონიტორინგი</p>
+          <div class="module-features">
+            <span>LeadsPage</span>
+            <span>CallCenter</span>
+            <span>BulkActions</span>
+          </div>
+        </div>
+        <!-- 7 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">🔐</div>
+          <h3>RBAC უსაფრთხოება</h3>
+          <p>როლებზე დაფუძნებული წვდომის კონტროლი — JWT, PermissionGuard, ProtectedRoute</p>
+          <div class="module-features">
+            <span>Roles</span>
+            <span>Permissions</span>
+            <span>JWT</span>
+          </div>
+        </div>
+        <!-- 8 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📥</div>
+          <h3>იმპორტი</h3>
+          <p>მონაცემთა მასობრივი იმპორტი Excel ფაილებიდან — ვალიდაცია, დუბლიკატების შემოწმება</p>
+          <div class="module-features">
+            <span>Excel</span>
+            <span>Validation</span>
+            <span>Bulk</span>
+          </div>
+        </div>
+        <!-- 9 -->
+        <div class="module-card reveal">
+          <div class="corner-glow"></div>
+          <div class="module-icon">📊</div>
+          <h3>რეპორტები</h3>
+          <p>მრავალფეროვანი ანგარიშგების სისტემა — Excel, PDF ექსპორტი და სტატისტიკური ანალიზი</p>
+          <div class="module-features">
+            <span>Reports</span>
+            <span>Excel</span>
+            <span>PDF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Detail -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">დეტალური ფუნქციონალი</div>
+        <h2 class="section-title">რას აკეთებს სისტემა?</h2>
+      </div>
+
+      <!-- Feature 1: Assets -->
+      <div class="feature-row reveal">
+        <div class="feature-visual">
+          <div class="feature-code">
+<span class="comment">// AssetForm — 7-სექციანი ფორმა</span><br>
+<span class="keyword">interface</span> <span class="type">AssetForm</span> {<br>
+&nbsp;&nbsp;sections: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"BasicInfo"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Classification"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Financial"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Depreciation"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Additional"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Attachments"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ExtendLife"</span><br>
+&nbsp;&nbsp;];<br>
+&nbsp;&nbsp;bulk: <span class="type">BulkActionsBar</span>;<br>
+}
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>აქტივების მართვა</h3>
+          <p>მრავალნაწილიანი ფორმა საშუალებას გაძლევთ სრულად აღწეროთ ყველა აქტივი — ძირითადი ინფორმაციიდან ფინანსურ პარამეტრებამდე.</p>
+          <ul class="check-list">
+            <li>Checkbox-ით მონიშვნა და ავტო-სელექცია</li>
+            <li>Floating BulkActionsBar ინსტრუმენტები</li>
+            <li>პაკეტური წაშლა და სტატუსის ცვლილება</li>
+            <li>ExtendLifeModal — ვადის გაგრძელება</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 2: Inventory -->
+      <div class="feature-row reverse reveal">
+        <div class="feature-visual">
+          <div class="feature-code">
+<span class="comment">// ინვენტარიზაციის სესია</span><br>
+<span class="keyword">const</span> session = <span class="keyword">await</span> <span class="method">createSession</span>({<br>
+&nbsp;&nbsp;scope: <span class="string">"FullCompany"</span>,<br>
+&nbsp;&nbsp;scanner: <span class="string">"HTML5_Camera"</span>,<br>
+&nbsp;&nbsp;decoder: <span class="string">"ZXing"</span>,<br>
+});<br><br>
+<span class="comment">// დისკრეპანსიები</span><br>
+<span class="keyword">const</span> results = {<br>
+&nbsp;&nbsp;missing: <span class="number">12</span>,&nbsp;&nbsp;<span class="comment">// აკლია</span><br>
+&nbsp;&nbsp;surplus: <span class="number">3</span>,&nbsp;&nbsp;&nbsp;<span class="comment">// ზედმეტია</span><br>
+&nbsp;&nbsp;matched: <span class="number">847</span>,&nbsp;<span class="comment">// სწორია</span><br>
+};
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>ინვენტარიზაცია</h3>
+          <p>სრული პროცესის ავტომატიზაცია — HTML5 კამერით სკანირება, რეალურ დროში პროგრესი და დისკრეპანსიების ანალიზი.</p>
+          <ul class="check-list">
+            <li>HTML5 Camera + ZXing Barcode ამოცნობა</li>
+            <li>HTTPS / localhost სკანირება</li>
+            <li>ხმოვანი შეტყობინებები (Voice Feedback)</li>
+            <li>Excel + PDF ექსპორტი</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 3: Orders Workflow -->
+      <div class="feature-row reveal">
+        <div class="feature-visual">
+          <div class="feature-code">
+<span class="comment">// შეკვეთის Workflow</span><br>
+<span class="keyword">enum</span> <span class="type">OrderStatus</span> {<br>
+&nbsp;&nbsp;<span class="string">Draft</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="string">Pending</span><br>
+&nbsp;&nbsp;<span class="string">Pending</span>&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="string">Approved</span><br>
+&nbsp;&nbsp;<span class="string">Approved</span>&nbsp;&nbsp;&nbsp;→ <span class="string">InProgress</span><br>
+&nbsp;&nbsp;<span class="string">InProgress</span> → <span class="string">Completed</span><br>
+&nbsp;&nbsp;<span class="string">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="string">Cancelled</span><br>
+}<br><br>
+<span class="comment">// 5 ტაბი: Overview, Items,</span><br>
+<span class="comment">// Documents, Comments, History</span>
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>შეკვეთების მოდული</h3>
+          <p>სრული Workflow სისტემა 5 ტაბით — Overview, Items, Documents, Comments და History.</p>
+          <ul class="check-list">
+            <li>მრავალსაფეხურიანი სტატუსის მართვა</li>
+            <li>დოკუმენტების ატვირთვა</li>
+            <li>კომენტარები და ისტორია</li>
+            <li>Email შეტყობინებები</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section id="stack">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">ტექნოლოგიური Stack</div>
+        <h2 class="section-title">თანამედროვე ტექნოლოგიები — 2026</h2>
+        <p class="section-subtitle">20,400+ ხაზი კოდი, აგებული სანდო და მასშტაბირებად ტექნოლოგიებზე</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-column reveal">
+          <h3><span class="dot"></span> Backend</h3>
+          <ul class="stack-list">
+            <li><span class="tech-icon">.N</span> .NET Core 8</li>
+            <li><span class="tech-icon">EF</span> Entity Framework Core</li>
+            <li><span class="tech-icon">DB</span> SQL Server 2019+</li>
+            <li><span class="tech-icon">🔑</span> JWT Authentication</li>
+            <li><span class="tech-icon">⚡</span> RESTful API</li>
+            <li><span class="tech-icon">📧</span> OrderService + Email</li>
+          </ul>
+        </div>
+        <div class="stack-column reveal">
+          <h3><span class="dot"></span> Frontend</h3>
+          <ul class="stack-list">
+            <li><span class="tech-icon">⚛️</span> React 19</li>
+            <li><span class="tech-icon">TS</span> TypeScript 5.x</li>
+            <li><span class="tech-icon">⚡</span> Vite 5.x</li>
+            <li><span class="tech-icon">🎨</span> TailwindCSS 4.x</li>
+            <li><span class="tech-icon">UI</span> shadcn/ui + Radix</li>
+            <li><span class="tech-icon">🔄</span> React Query v5</li>
+          </ul>
+        </div>
+        <div class="stack-column reveal">
+          <h3><span class="dot"></span> Security</h3>
+          <ul class="stack-list">
+            <li><span class="tech-icon">🔒</span> JWT Bearer</li>
+            <li><span class="tech-icon">🛡️</span> RBAC Permission</li>
+            <li><span class="tech-icon">🚧</span> PermissionGuard</li>
+            <li><span class="tech-icon">🌐</span> CORS Policy</li>
+            <li><span class="tech-icon">#️⃣</span> Password Hashing</li>
+            <li><span class="tech-icon">📝</span> Audit Logging</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section id="architecture">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">არქიტექტურა</div>
+        <h2 class="section-title">სისტემის სტრუქტურა</h2>
+      </div>
+
+      <div class="arch-visual reveal">
+        <div class="arch-layers">
+          <!-- Frontend Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Frontend — React 19 + TypeScript</div>
+            <div class="arch-items">
+              <span class="arch-item">Dashboard</span>
+              <span class="arch-item">AssetsPage</span>
+              <span class="arch-item">InventoryPage</span>
+              <span class="arch-item">WarehousePage</span>
+              <span class="arch-item">OrdersPage</span>
+              <span class="arch-item">LeadsPage</span>
+              <span class="arch-item">RolesPage</span>
+              <span class="arch-item">UsersPage</span>
+              <span class="arch-item">ReportsPage</span>
+              <span class="arch-item">PermissionGuard</span>
+              <span class="arch-item">ProtectedRoute</span>
+              <span class="arch-item">Sidebar_Dynamic</span>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="arch-connector">
+            <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
+              <path d="M12 0 L12 24 M6 18 L12 24 L18 18" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- API Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">API Layer — .NET Core 8 Controllers</div>
+            <div class="arch-items">
+              <span class="arch-item">AssetsController</span>
+              <span class="arch-item">InventoryController</span>
+              <span class="arch-item">OrdersController</span>
+              <span class="arch-item">PermissionsController</span>
+              <span class="arch-item">RolesController</span>
+              <span class="arch-item">ReportsController</span>
+              <span class="arch-item">AuthService</span>
+              <span class="arch-item">OrderService</span>
+              <span class="arch-item">PermissionService</span>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="arch-connector">
+            <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
+              <path d="M12 0 L12 24 M6 18 L12 24 L18 18" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Database Layer -->
+          <div class="arch-layer">
+            <div class="arch-layer-label">Database — SQL Server + Entity Framework</div>
+            <div class="arch-items">
+              <span class="arch-item">Asset</span>
+              <span class="arch-item">AssetDepreciationHistory</span>
+              <span class="arch-item">InventorySession</span>
+              <span class="arch-item">InventoryScan</span>
+              <span class="arch-item">Role</span>
+              <span class="arch-item">Permission</span>
+              <span class="arch-item">RolePermission</span>
+              <span class="arch-item">UserRole</span>
+              <span class="arch-item">ApplicationDbContext</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">AssetFlow Studio</div>
+    <div class="footer-tech">React 19 • .NET Core 8 • SQL Server • TypeScript</div>
+    <div class="footer-copy">Version 2.0 — მარტი 2026 — 20,400+ ხაზი კოდი</div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Counter animation
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = target >= 1000 ? '+' : '+';
+          const displayTarget = target >= 1000 ? Math.floor(target / 1000) + ',' + String(target % 1000).padStart(3, '0') : String(target);
+          let current = 0;
+          const increment = target / 60;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            const val = Math.floor(current);
+            if (val >= 1000) {
+              el.textContent = Math.floor(val / 1000) + ',' + String(val % 1000).padStart(3, '0') + '+';
+            } else {
+              el.textContent = val + '+';
+            }
+          }, 25);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+  </script>
+</body>
+</html>
