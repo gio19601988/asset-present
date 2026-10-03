@@ -29,3 +29,16 @@
   for = "/*thanks.html"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# Internal docs live in the repo but are not served publicly
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/PROJECT_OVERVIEW.md"
+  to = "/404.html"
+  status = 404
+  force = true

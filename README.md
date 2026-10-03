@@ -2,6 +2,8 @@
 
 AssetFlow Studio-ს მარკეტინგული საიტი: **https://assetsflow.netlify.app/**
 
+> სრული აღწერა (მიზნები, სექციები, სურათების რუკა, წესები): [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)
+
 სტატიკური საიტია (HTML + CSS + JS, build-ის გარეშე). `main` ბრენჩზე ყოველი push ავტომატურად ქვეყნდება Netlify-ზე.
 
 ## სტრუქტურა
