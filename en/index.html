@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AssetFlow Studio — Modular ERP for Finance, Healthcare and Asset Management</title>
+    <meta name="description" content="AssetFlow Studio is a modular ERP platform: financial reporting from ORIS 5, hospital revenue and department EBITDA, fixed assets, inventory counts, warehouse, HR, CRM and ITIL incident management in one system.">
+    <link rel="canonical" href="https://assetsflow.netlify.app/en/">
+    <link rel="alternate" hreflang="ka" href="https://assetsflow.netlify.app/">
+    <link rel="alternate" hreflang="en" href="https://assetsflow.netlify.app/en/">
+    <link rel="alternate" hreflang="x-default" href="https://assetsflow.netlify.app/">
+    <meta name="theme-color" content="#070b16">
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AssetFlow Studio">
+    <meta property="og:title" content="AssetFlow Studio — One platform for the whole organization">
+    <meta property="og:description" content="Finance, healthcare operations, assets, HR and CRM in one modular ERP. Version 6.0.">
+    <meta property="og:url" content="https://assetsflow.netlify.app/en/">
+    <meta property="og:image" content="https://assetsflow.netlify.app/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AssetFlow Studio — modular ERP platform dashboard">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ka_GE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AssetFlow Studio — Modular ERP platform">
+    <meta name="twitter:description" content="Finance, healthcare, assets, HR and CRM — in one system.">
+    <meta name="twitter:image" content="https://assetsflow.netlify.app/images/og-image.jpg">
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="preload" as="image" href="/images/screens/cash-flow.webp" fetchpriority="high">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="/assets/js/main.js" defer></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://assetsflow.netlify.app/#org",
+                "name": "AssetFlow Studio",
+                "url": "https://assetsflow.netlify.app/",
+                "logo": "https://assetsflow.netlify.app/images/icon-512.png",
+                "email": "assetsflowstudio@gmail.com",
+                "telephone": "+995595048283",
+                "address": { "@type": "PostalAddress", "addressLocality": "Tbilisi", "addressCountry": "GE" },
+                "sameAs": ["https://www.facebook.com/profile.php?id=61577590663221"]
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "AssetFlow Studio",
+                "applicationCategory": "BusinessApplication",
+                "applicationSubCategory": "ERP",
+                "operatingSystem": "Web browser; server: Windows Server / Linux",
+                "softwareVersion": "6.0",
+                "inLanguage": ["ka", "en"],
+                "description": "Modular ERP platform: financial reporting, hospital revenue analytics, fixed assets, inventory, warehouse, HR, CRM and incident management.",
+                "screenshot": "https://assetsflow.netlify.app/images/screens/cash-flow.webp",
+                "publisher": { "@id": "https://assetsflow.netlify.app/#org" },
+                "offers": { "@type": "Offer", "price": "150", "priceCurrency": "GEL", "description": "Starter — monthly subscription" }
+            }
+        ]
+    }
+    </script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ====== NAVIGATION ====== -->
+<header class="nav" id="nav">
+    <div class="container nav-inner">
+        <a href="/en/" class="logo" aria-label="AssetFlow Studio — home">
+            <img src="/favicon.svg" alt="" width="34" height="34">
+            <span>AssetFlow <em>Studio</em></span>
+        </a>
+        <nav aria-label="Main navigation">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#platform">Platform</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screens">Product tour</a></li>
+                <li><a href="#whats-new">What's new</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <a class="lang-switch" href="/" hreflang="ka" lang="ka"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#globe"/></svg>ქარ<span class="sr-only"> — ქართული ვერსია</span></a>
+            <a href="#contact" class="btn btn-primary btn-sm">Book a demo</a>
+            <button class="nav-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false">
+                <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#menu"/></svg>
+                <span class="sr-only">Menu</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-content">
+            <a class="eyebrow" href="#whats-new"><b>v6.0</b> New: financial reporting, budgeting &amp; hospital EBITDA →</a>
+            <h1>One platform.<br><span class="grad">The whole organization.</span></h1>
+            <p class="hero-lead">
+                AssetFlow Studio brings finance, accounting, healthcare, fixed assets, inventory, warehouse, HR, CRM and marketing into a single digital workspace — live data instead of spreadsheets.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Book a free demo <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></a>
+                <a href="#screens" class="btn btn-ghost"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#play"/></svg> Take the tour</a>
+            </div>
+            <div class="hero-note">
+                <span><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg>On-premise — your data stays on your servers</span>
+                <span><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg>English &amp; Georgian</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="browser">
+                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>AssetFlow Studio · Financial dashboard</span></div>
+                <img src="/images/screens/cash-flow.webp" width="1338" height="557" alt="ORIS 5 financial dashboard — cash flow, opening and closing balance, cash balance trend" fetchpriority="high">
+            </div>
+            <div class="float-card float-a">
+                <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg></div>
+                <div><strong>IAS 7 cash flow</strong><small>Balance reconciliation — difference 0.00</small></div>
+            </div>
+            <div class="float-card float-b">
+                <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg></div>
+                <div><strong>280 permission codes</strong><small>Role-based access control</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROOF ====== -->
+<section class="proof" aria-labelledby="proof-title">
+    <div class="container">
+        <h2 class="proof-title" id="proof-title">Running in a real, large-scale production environment</h2>
+        <div class="proof-grid">
+            <div class="proof-item"><strong>25</strong><span>modules on one platform</span></div>
+            <div class="proof-item"><strong>1,800+</strong><span>employees in the HR registry</span></div>
+            <div class="proof-item"><strong>8,000+</strong><span>fixed assets tracked</span></div>
+            <div class="proof-item"><strong>1,076</strong><span>medical devices with alerts</span></div>
+            <div class="proof-item"><strong>3,100</strong><span>counterparties synced from ORIS 5</span></div>
+            <div class="proof-item"><strong>755K</strong><span>ledger entries since 2018</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROBLEM → OUTCOME ====== -->
+<section class="section" id="why">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Sound familiar?</span>
+            <h2 class="h2">Spreadsheets, disconnected tools and hand-built reports that are wrong the day after they're made</h2>
+            <p class="lead">AssetFlow Studio replaces scattered files with a single source of truth that is always up to date.</p>
+        </div>
+        <div class="problem-grid reveal">
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>A 60-sheet budget workbook</h3>
+                <p>Versions travel by email, formulas break, and nobody knows who changed what.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>Scenario budgets with version approval and locking</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>Financial statements built by hand</h3>
+                <p>P&amp;L and cash flow are rebuilt every month from accounting exports.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>Live reporting straight from the ORIS 5 database</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>Revenue analysis in a separate BI tool</h3>
+                <p>Department revenue and costs live in different sources that never quite match.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>Department EBITDA that always sums to the ledger EBITDA</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>Inventory counts on paper</h3>
+                <p>Days spent comparing lists; shortages surface far too late.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>Camera barcode scanning and an automatic discrepancy report</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>Device inspection dates live in someone's head</h3>
+                <p>Maintenance gets missed until the equipment goes down.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>Alerts 90 / 30 / 7 days ahead to the responsible engineer</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>Before</div>
+                <h3>"Who changed this?" — no answer</h3>
+                <p>Everyone can access everything, and there is no change history.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>RBAC with 280 permissions and a full activity log</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PLATFORM / MODULES ====== -->
+<section class="section section-alt" id="platform">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Platform</span>
+            <h2 class="h2">25 modules — switch on only what you need</h2>
+            <p class="lead">Modules can be enabled and disabled without losing data. The core is protected, and you can always switch a module back on.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Module groups">
+            <button class="tab" role="tab" id="tab-fin" aria-controls="panel-fin"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg>Finance</button>
+            <button class="tab" role="tab" id="tab-med" aria-controls="panel-med"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#heart-pulse"/></svg>Healthcare</button>
+            <button class="tab" role="tab" id="tab-ops" aria-controls="panel-ops"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#box"/></svg>Assets &amp; operations</button>
+            <button class="tab" role="tab" id="tab-team" aria-controls="panel-team"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#users"/></svg>People &amp; CRM</button>
+            <button class="tab" role="tab" id="tab-core" aria-controls="panel-core"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#layers"/></svg>Platform core</button>
+        </div>
+
+        <!-- Finance -->
+        <div class="tab-panel" role="tabpanel" id="panel-fin" aria-labelledby="tab-fin">
+            <h3 class="panel-title">Finance</h3>
+            <p class="panel-intro">Accounting data from ORIS 5, ready for analysis and refreshed every day.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <span class="badge-new">New</span>
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg></div>
+                    <h3>Financial reporting (ORIS 5)</h3>
+                    <p>P&amp;L, cash flow and a financial dashboard on one page.</p>
+                    <ul><li>P&amp;L with drill-down from notes to entries</li><li>Cash flow — IAS 7, direct method</li><li>EBITDA bridge, FCF, runway</li><li>PDF · Excel · PowerPoint</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">New</span>
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#target"/></svg></div>
+                    <h3>Budgeting &amp; cash planning</h3>
+                    <p>Scenario budgets and a seasonality-aware cash forecast.</p>
+                    <ul><li>Scenarios T0 / LE / T1 / T2</li><li>Budget lines with owning managers</li><li>Version approval and locking</li><li>Cash desk reconciliation reports</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#wallet"/></svg></div>
+                    <h3>Receivables &amp; payables</h3>
+                    <p>Accounting, medical and private-patient debt in one view.</p>
+                    <ul><li>Aging: 0–30 / 31–60 / 61–90 / 180+</li><li>Payment calendar and payment plan</li><li>Breakdown by insurer, claim statuses</li><li>Partial payments</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#link"/></svg></div>
+                    <h3>ORIS 5 integration</h3>
+                    <p>Trial balance, account statements and suppliers — totals reconcile to the general ledger.</p>
+                    <ul><li>3,100 counterparties synchronized</li><li>Payment terms and bank details</li><li>Procurement analytics by supplier</li><li>Snapshots — 80–500 ms responses</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">New</span>
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#coins"/></svg></div>
+                    <h3>Exchange rates</h3>
+                    <p>National Bank of Georgia rates, fetched automatically and shown on the login page.</p>
+                    <ul><li>USD, EUR — dated history</li><li>Offline — last known rate</li><li>Manual overrides keep the original figure</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Healthcare -->
+        <div class="tab-panel" role="tabpanel" id="panel-med" aria-labelledby="tab-med">
+            <h3 class="panel-title">Healthcare</h3>
+            <p class="panel-intro">Clinic and hospital workflows, from registration to settlement.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <span class="badge-new">New</span>
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#trending-up"/></svg></div>
+                    <h3>Hospital revenue &amp; EBITDA</h3>
+                    <p>Hospital information system + ORIS 5 — no separate BI tool required.</p>
+                    <ul><li>Outpatient and inpatient by department</li><li>Net revenue after insurer discounts</li><li>Cost allocation to departments</li><li>Executive report: PDF + Excel</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#stethoscope"/></svg></div>
+                    <h3>Patient cases</h3>
+                    <p>Patient registry, electronic records, pharmacy and billing in one flow.</p>
+                    <ul><li>Search-before-create prevents duplicates</li><li>Signed records are locked</li><li>Pharmacy: batches, expiry, FEFO</li><li>Multiple payers per case</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">New</span>
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#activity"/></svg></div>
+                    <h3>Medical equipment registry</h3>
+                    <p>Inspections, maintenance and repairs, with alerts.</p>
+                    <ul><li>1,076 devices with full history</li><li>Alerts 90 / 30 / 7 days ahead</li><li>One digest email per engineer</li><li>Linked to ORIS 5 by inventory number</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></div>
+                    <h3>Callbacks: radiologist → surgeon → call center</h3>
+                    <p>A full case timeline at every stage, with active and passive cases.</p>
+                    <ul><li>Study and call history</li><li>Email summaries for surgeons</li><li>Readmission tracking</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Assets & operations -->
+        <div class="tab-panel" role="tabpanel" id="panel-ops" aria-labelledby="tab-ops">
+            <h3 class="panel-title">Assets &amp; operations</h3>
+            <p class="panel-intro">The full fixed-asset lifecycle, from purchase to write-off.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#box"/></svg></div>
+                    <h3>Asset management</h3>
+                    <p>A 7-section asset form, parent–child hierarchy and bulk operations.</p>
+                    <ul><li>Financials, warranty, attachments</li><li>Useful-life extension</li><li>Bulk status changes</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#trending-down"/></svg></div>
+                    <h3>Depreciation</h3>
+                    <p>Automatic monthly charges, aggregated or per asset.</p>
+                    <ul><li>Straight-line, declining balance, units of production</li><li>Reverse by month, session or asset</li><li>30,000+ historical records</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#scan"/></svg></div>
+                    <h3>Inventory counts</h3>
+                    <p>Company-wide or department sessions, scanned with a phone camera.</p>
+                    <ul><li>Barcode recognition with audio feedback</li><li>Missing / surplus / matched</li><li>Excel + PDF reports, archive</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#warehouse"/></svg></div>
+                    <h3>Warehouse &amp; stock</h3>
+                    <p>Multiple warehouses and real-time stock movements.</p>
+                    <ul><li>Receipts, issues, transfers, returns</li><li>Minimum stock alerts</li><li>Supplier linking</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#cart"/></svg></div>
+                    <h3>Purchase orders</h3>
+                    <p>The procurement cycle, from request to sending the order to the supplier.</p>
+                    <ul><li>Approval workflow</li><li>Line-by-line review</li><li>Documents, comments, history</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#upload"/></svg></div>
+                    <h3>Import &amp; data entry</h3>
+                    <p>Bring your existing data across in minutes.</p>
+                    <ul><li>Excel template with validation</li><li>Create assets from PDF invoices</li><li>Barcode / QR (CODE-128) printing</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- People & CRM -->
+        <div class="tab-panel" role="tabpanel" id="panel-team" aria-labelledby="tab-team">
+            <h3 class="panel-title">People &amp; CRM</h3>
+            <p class="panel-intro">People, communication and sales — in the same system, under the same permissions.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#users"/></svg></div>
+                    <h3>HR</h3>
+                    <p>From the staffing table to license monitoring.</p>
+                    <ul><li>Workplaces, positions, FTE</li><li>Contract end dates</li><li>Medical license alerts 60 days ahead</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#wrench"/></svg></div>
+                    <h3>Incident manager (ITIL)</h3>
+                    <p>Fault reporting with SLA timers.</p>
+                    <ul><li>Priority from an Impact × Urgency matrix</li><li>SLA breaches turn red in the list</li><li>Equipment downtime and resolution codes</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#folder"/></svg></div>
+                    <h3>Document management</h3>
+                    <p>Hierarchical folders with version history.</p>
+                    <ul><li>Validity dates and tags</li><li>Public / internal / confidential</li><li>The same rules apply to file links</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#message"/></svg></div>
+                    <h3>Internal messaging</h3>
+                    <p>Direct and group conversations with attachments.</p>
+                    <ul><li>Replies, edits, read receipts</li><li>No "admin can read everything" back door — by design</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#headset"/></svg></div>
+                    <h3>Leads &amp; call center</h3>
+                    <p>CRM with Excel lead import and an agent dashboard.</p>
+                    <ul><li>Call statistics</li><li>Statuses and notes</li><li>Bulk actions and export</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#megaphone"/></svg></div>
+                    <h3>Social media &amp; marketing</h3>
+                    <p>From planning to publishing — Facebook, Instagram, LinkedIn.</p>
+                    <ul><li>Content calendar and campaigns</li><li>Approval flow with an audit log</li><li>Scheduled auto-publishing</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Platform core -->
+        <div class="tab-panel" role="tabpanel" id="panel-core" aria-labelledby="tab-core">
+            <h3 class="panel-title">Platform core</h3>
+            <p class="panel-intro">The shared foundation every module is built on.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg></div>
+                    <h3>RBAC security</h3>
+                    <p>Roles + permission codes, with a menu that adapts to each user's rights.</p>
+                    <ul><li>280 permission codes, 25+ roles</li><li>Button-level control</li><li>Activity log</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#toggle"/></svg></div>
+                    <h3>Module management</h3>
+                    <p>Enable or disable modules without deleting data.</p>
+                    <ul><li>Disabled modules close their APIs</li><li>The core cannot be switched off</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#languages"/></svg></div>
+                    <h3>Language packs</h3>
+                    <p>Georgian and English — translations live in the database, not in code.</p>
+                    <ul><li>Edit without a developer</li><li>A new language is one table row</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#bar-chart"/></svg></div>
+                    <h3>Report catalog</h3>
+                    <p>Every report in one place, organized by the menu hierarchy.</p>
+                    <ul><li>Formatted Excel for every report</li><li>Always compare: previous → current</li><li>Executive-ready PDFs</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#clock"/></svg></div>
+                    <h3>Background services</h3>
+                    <p>Scheduled data refreshes and email delivery.</p>
+                    <ul><li>Last-run status and manual trigger</li><li>Lock against parallel runs</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#search"/></svg></div>
+                    <h3>Search, themes, accessibility</h3>
+                    <p>The interface adapts to the user, not the other way around.</p>
+                    <ul><li>Global search with Ctrl+K — permission-aware</li><li>5 themes, font size, high contrast</li><li>Latin keyboard input finds Georgian text</li></ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FEATURE SPOTLIGHTS ====== -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Features</span>
+            <h2 class="h2">Decisions based on live data</h2>
+            <p class="lead">Every number is clickable, from the total down to a single entry.</p>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">Financial dashboard · ORIS 5</span>
+                <h3>Spreadsheets that never go stale</h3>
+                <p>Four ORIS modules on one page — P&amp;L, cash flow, receivables and fixed assets — using the same formulas as the reports.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>755,000 entries since 2018 <span>— note → account → entry</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>IAS 7 cash flow <span>— balance reconciliation, difference 0.00</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Management adjustments <span>— year-over-year comparison</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Export to PDF, Excel, PowerPoint <span>— Excel in your own FS layout</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/finance-overview.webp" data-title="ORIS 5 — financial dashboard" data-desc="Revenue, EBITDA, operating and net profit, cash flow and receivables">
+                    <span class="browser"><img src="/images/screens/finance-overview-sm.webp" srcset="/images/screens/finance-overview-sm.webp 720w, /images/screens/finance-overview.webp 1332w" sizes="(max-width: 960px) 100vw, 640px" width="1332" height="563" loading="lazy" alt="Financial dashboard with KPI cards: revenue, EBITDA, operating profit, net profit"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">Hospital revenue</span>
+                <h3>Department EBITDA without a separate BI tool</h3>
+                <p>Hospital system and ORIS 5 data side by side: outpatient and inpatient revenue, patient cards, growth leaders and cost allocation.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Departments always sum to ORIS EBITDA <span>— any gap is shown on its own line</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Net revenue <span>— after insurer discounts</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Executive report <span>— ~20-page PDF with findings, 8-sheet Excel</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/medical-revenue-dynamics.webp" data-title="Hospital revenue — trends" data-desc="Monthly revenue and cumulative comparison with the prior period">
+                    <span class="browser"><img src="/images/screens/medical-revenue-dynamics-sm.webp" srcset="/images/screens/medical-revenue-dynamics-sm.webp 720w, /images/screens/medical-revenue-dynamics.webp 1332w" sizes="(max-width: 960px) 100vw, 640px" width="1332" height="554" loading="lazy" alt="Hospital revenue analytics: outpatient and inpatient revenue by month"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">Fixed assets</span>
+                <h3>Assets and depreciation — automatic and audit-ready</h3>
+                <p>Every asset's history, monthly charges and net book value by asset group, one click away.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>3 standard depreciation methods + custom</div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Bulk reversal <span>— by month, session or asset</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Group analytics <span>— cost, net book value, depreciation rate</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/depreciation.webp" data-title="Depreciation history" data-desc="Charges per asset, filters and bulk reversal">
+                    <span class="browser"><img src="/images/screens/depreciation-sm.webp" srcset="/images/screens/depreciation-sm.webp 720w, /images/screens/depreciation.webp 1341w" sizes="(max-width: 960px) 100vw, 640px" width="1341" height="555" loading="lazy" alt="Depreciation history page with summary cards and a table of charges"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">Inventory counts</span>
+                <h3>Your phone camera is the barcode scanner</h3>
+                <p>Open a session, scan your assets, and the system shows what is missing, what is surplus and what matches.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Automatic recognition <span>— with an audio cue</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Discrepancy report <span>— PDF and Excel</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Session archive <span>— past counts are never lost</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/inventory-discrepancy.webp" data-title="Inventory count — discrepancy report" data-desc="Total, scanned, missing, surplus, matched">
+                    <span class="browser"><img src="/images/screens/inventory-discrepancy-sm.webp" srcset="/images/screens/inventory-discrepancy-sm.webp 720w, /images/screens/inventory-discrepancy.webp 1334w" sizes="(max-width: 960px) 100vw, 640px" width="1334" height="557" loading="lazy" alt="Inventory discrepancy report showing missing, surplus and matched assets"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">Incident manager</span>
+                <h3>ITIL practice — no more "everything is critical"</h3>
+                <p>Priority isn't set by hand; it is derived from an impact and urgency matrix, and the SLA is visible right on the form.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Critical — 15 min / 4 h <span>· High — 1 h / 8 h · Medium — 4 h / 24 h</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Equipment downtime tracking <span>— and major incidents</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Photo attachments and resolution codes <span>— for statistics</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/incident-manager.webp" data-title="Incident manager" data-desc="Incident card: status, priority, resolution deadline and SLA">
+                    <span class="browser"><img src="/images/screens/incident-manager-sm.webp" srcset="/images/screens/incident-manager-sm.webp 720w, /images/screens/incident-manager.webp 1351w" sizes="(max-width: 960px) 100vw, 640px" width="1351" height="574" loading="lazy" alt="Incident card with priority, SLA deadline and technical service assignment"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">Personalization</span>
+                <h3>Five themes, two languages, one codebase</h3>
+                <p>Each user chooses their own theme, font size, display density and accessibility settings.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>High contrast and visible focus</div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Reduced motion <span>— follows the operating-system setting</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>Global search with Ctrl+K <span>— menus, sub-menus and data together</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/personalization.webp" data-title="System settings — personalization" data-desc="Theme, language, font size, density, accent color and accessibility">
+                    <span class="browser"><img src="/images/screens/personalization-sm.webp" srcset="/images/screens/personalization-sm.webp 720w, /images/screens/personalization.webp 1361w" sizes="(max-width: 960px) 100vw, 640px" width="1361" height="561" loading="lazy" alt="Personalization panel: themes, language, font size and accent color"></span>
+                    <span class="sr-only">Enlarge</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== SCREENSHOT GALLERY ====== -->
+<section class="section section-alt" id="screens">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Product tour</span>
+            <h2 class="h2">See it in action</h2>
+            <p class="lead">Real screens from Version 6.0, with confidential data masked. The interface shown is in Georgian; every screen is also available in English.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter screens">
+            <button class="tab" data-filter="all" aria-pressed="true">All</button>
+            <button class="tab" data-filter="finance" aria-pressed="false">Finance</button>
+            <button class="tab" data-filter="medical" aria-pressed="false">Healthcare</button>
+            <button class="tab" data-filter="ops" aria-pressed="false">Assets &amp; operations</button>
+            <button class="tab" data-filter="admin" aria-pressed="false">Administration</button>
+        </div>
+
+        <div class="gallery">
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-overview.webp" data-title="Financial dashboard — overview" data-desc="Revenue, EBITDA, profit, cash flow, receivables and payables"><img src="/images/screens/finance-overview-sm.webp" width="720" height="304" loading="lazy" alt="Financial dashboard overview"><figcaption><strong>Financial dashboard — overview</strong><span>Revenue, EBITDA, profit, debt</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-charts.webp" data-title="Revenue, EBITDA and cost structure" data-desc="Monthly trend, three-section cash flow, cost structure"><img src="/images/screens/finance-charts-sm.webp" width="720" height="303" loading="lazy" alt="Revenue, EBITDA and cost charts"><figcaption><strong>Revenue, EBITDA, costs</strong><span>Monthly trend and structure</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/cash-flow.webp" data-title="Cash flow" data-desc="Opening and closing balance, FCF, operating, investing and financing flows"><img src="/images/screens/cash-flow-sm.webp" width="720" height="300" loading="lazy" alt="Cash flow tab"><figcaption><strong>Cash flow (IAS 7)</strong><span>Balances, FCF, flows by section</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/receivables.webp" data-title="Accounts receivable" data-desc="FIFO aging, period turnover, overdue balance"><img src="/images/screens/receivables-sm.webp" width="720" height="300" loading="lazy" alt="Accounts receivable analysis"><figcaption><strong>Accounts receivable</strong><span>FIFO aging and turnover</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/payables.webp" data-title="Accounts payable — ORIS 5" data-desc="Open liabilities by payment terms"><img src="/images/screens/payables-sm.webp" width="720" height="303" loading="lazy" alt="Accounts payable by payment terms"><figcaption><strong>Accounts payable</strong><span>Terms, calendar, payment plan</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/payers.webp" data-title="Payers" data-desc="Revenue by payer, insurance company trends"><img src="/images/screens/payers-sm.webp" width="720" height="309" loading="lazy" alt="Revenue by payer"><figcaption><strong>Revenue by payer</strong><span>Insurers and categories</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-aging.webp" data-title="Aging and fixed asset groups" data-desc="Receivables vs payables by age, fixed assets by group"><img src="/images/screens/finance-aging-sm.webp" width="720" height="303" loading="lazy" alt="Receivables and payables aging"><figcaption><strong>Aging and asset groups</strong><span>Receivables vs payables</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-revenue.webp" data-title="Department revenue" data-desc="Outpatient + inpatient, compared with the same period last year"><img src="/images/screens/medical-revenue-sm.webp" width="720" height="295" loading="lazy" alt="Full department revenue report"><figcaption><strong>Department revenue</strong><span>Outpatient + inpatient</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-revenue-dynamics.webp" data-title="Hospital revenue — trends" data-desc="Monthly and cumulative revenue comparison"><img src="/images/screens/medical-revenue-dynamics-sm.webp" width="720" height="299" loading="lazy" alt="Hospital revenue trends"><figcaption><strong>Revenue trends</strong><span>Monthly and cumulative</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-equipment.webp" data-title="Medical equipment registry" data-desc="Inspections, maintenance, alerts and ORIS 5 linking"><img src="/images/screens/medical-equipment-sm.webp" width="720" height="300" loading="lazy" alt="Medical equipment registry"><figcaption><strong>Equipment registry</strong><span>Due dates, alerts, engineers</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/patient-registration.webp" data-title="Patient registration" data-desc="New patient — even without a personal ID (foreign nationals, newborns)"><img src="/images/screens/patient-registration-sm.webp" width="720" height="296" loading="lazy" alt="Patient registration form"><figcaption><strong>Patient registration</strong><span>With duplicate prevention</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/incident-manager.webp" data-title="Incident manager" data-desc="ITIL priority and SLA"><img src="/images/screens/incident-manager-sm.webp" width="720" height="306" loading="lazy" alt="Incident card"><figcaption><strong>Incident manager</strong><span>ITIL priority and SLA</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/fixed-assets-analytics.webp" data-title="Fixed assets by group" data-desc="Cost, net book value, monthly depreciation and additions over time"><img src="/images/screens/fixed-assets-analytics-sm.webp" width="720" height="303" loading="lazy" alt="Fixed asset analytics by group"><figcaption><strong>Fixed assets</strong><span>Groups, book value, depreciation</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/depreciation.webp" data-title="Depreciation history" data-desc="Charges, filters, bulk reversal"><img src="/images/screens/depreciation-sm.webp" width="720" height="298" loading="lazy" alt="Depreciation history"><figcaption><strong>Depreciation history</strong><span>Charges and export</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/inventory-scan.webp" data-title="Inventory count — scanning" data-desc="Camera scanning or manual entry"><img src="/images/screens/inventory-scan-sm.webp" width="720" height="298" loading="lazy" alt="Inventory scanning page"><figcaption><strong>Inventory — scanning</strong><span>Camera or manual entry</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/inventory-discrepancy.webp" data-title="Discrepancy report" data-desc="Missing, surplus, matched — PDF and Excel"><img src="/images/screens/inventory-discrepancy-sm.webp" width="720" height="301" loading="lazy" alt="Discrepancy report"><figcaption><strong>Discrepancy report</strong><span>Missing / surplus / matched</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/orders.webp" data-title="Purchase orders" data-desc="The procurement cycle, from request to supplier"><img src="/images/screens/orders-sm.webp" width="720" height="301" loading="lazy" alt="Purchase order list with statuses"><figcaption><strong>Purchase orders</strong><span>Statuses, budget, due dates</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/stock.webp" data-title="Stock" data-desc="Stock by warehouse, low-stock warnings"><img src="/images/screens/stock-sm.webp" width="720" height="296" loading="lazy" alt="Detailed stock view"><figcaption><strong>Stock</strong><span>Warehouses and low stock</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/suppliers.webp" data-title="Suppliers" data-desc="Company details, contacts, bank data, refresh from ORIS"><img src="/images/screens/suppliers-sm.webp" width="720" height="299" loading="lazy" alt="New supplier form"><figcaption><strong>Suppliers</strong><span>Synchronized with ORIS 5</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/hr-employees.webp" data-title="HR" data-desc="Employee registry, FTE, workplaces, positions"><img src="/images/screens/hr-employees-sm.webp" width="720" height="302" loading="lazy" alt="Employee registry"><figcaption><strong>HR</strong><span>Registry, FTE, positions</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/messaging.webp" data-title="Internal messaging" data-desc="Direct and group conversations with attachments"><img src="/images/screens/messaging-sm.webp" width="720" height="298" loading="lazy" alt="Internal messaging page"><figcaption><strong>Internal messaging</strong><span>Direct and group</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/social-media.webp" data-title="Social media &amp; marketing" data-desc="Connected pages, token expiry, content calendar"><img src="/images/screens/social-media-sm.webp" width="720" height="293" loading="lazy" alt="Social media module"><figcaption><strong>Social media</strong><span>Facebook, Instagram, LinkedIn</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/home.webp" data-title="Home" data-desc="Module overview and quick navigation"><img src="/images/screens/home-sm.webp" width="720" height="301" loading="lazy" alt="Home page with module cards"><figcaption><strong>Home</strong><span>Module overview</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/login.webp" data-title="Login page" data-desc="National Bank exchange rates, connection speed test, ERP module overview"><img src="/images/screens/login-sm.webp" width="720" height="318" loading="lazy" alt="Login page"><figcaption><strong>Login page</strong><span>Exchange rates and speed test</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/roles.webp" data-title="Role management" data-desc="25 roles and their permission configuration"><img src="/images/screens/roles-sm.webp" width="720" height="299" loading="lazy" alt="Role management page"><figcaption><strong>Role management</strong><span>RBAC configuration</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/system-settings.webp" data-title="System settings" data-desc="Logging, system logs, roles, permissions, background services"><img src="/images/screens/system-settings-sm.webp" width="720" height="302" loading="lazy" alt="System settings page"><figcaption><strong>System settings</strong><span>Administration in one place</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/personalization.webp" data-title="Personalization" data-desc="Themes, language, font size, accessibility"><img src="/images/screens/personalization-sm.webp" width="720" height="297" loading="lazy" alt="Personalization panel"><figcaption><strong>Personalization</strong><span>Themes and accessibility</span></figcaption></button></figure>
+        </div>
+    </div>
+</section>
+
+<!-- ====== WHAT'S NEW ====== -->
+<section class="section" id="whats-new">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">What's new</span>
+            <h2 class="h2">What changed in Version 6.0</h2>
+            <p class="lead">The platform keeps evolving around what real users need.</p>
+        </div>
+        <div class="release reveal">
+            <aside class="release-card">
+                <div class="ver">v6.0</div>
+                <div class="date">September 2026</div>
+                <div class="release-stats">
+                    <div><strong>+53K</strong><span>lines of code</span></div>
+                    <div><strong>+83</strong><span>APIs</span></div>
+                    <div><strong>+36</strong><span>tables</span></div>
+                </div>
+                <small>In 19 days — measured, not estimated (compared with the 10 September build).</small>
+            </aside>
+            <div class="release-groups">
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#sparkles"/></svg>New areas</h3>
+                    <ul><li>Financial reporting from ORIS 5</li><li>Hospital revenue and EBITDA</li><li>Budgeting and cash forecasting</li><li>Medical equipment registry</li></ul>
+                </div>
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#palette"/></svg>Interface</h3>
+                    <ul><li>Formatted Excel for every report</li><li>Always compare: previous → current</li><li>New login page + exchange rates</li><li>Speed test in the header</li></ul>
+                </div>
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#refresh"/></svg>Operations</h3>
+                    <ul><li>Callbacks: active / passive</li><li>Readmission tracking</li><li>Engineer alerts</li><li>Automatic currency sync</li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== SECURITY ====== -->
+<section class="section section-alt" id="security">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Security &amp; resilience</span>
+            <h2 class="h2">Your data, on your servers, under strict control</h2>
+            <p class="lead">In August–September 2026 the platform went through a full security hardening.</p>
+        </div>
+        <div class="sec-grid reveal">
+            <div class="sec-card">
+                <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#lock"/></svg></div>
+                <h3>Access</h3>
+                <ul><li>Every endpoint protected by default</li><li>280 permission codes</li><li>Uploaded files require authorization too</li><li>Least-privilege database login</li></ul>
+            </div>
+            <div class="sec-card">
+                <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#key"/></svg></div>
+                <h3>Secrets</h3>
+                <ul><li>No passwords in code or Git</li><li>Social media tokens encrypted at rest</li><li>Tokens are never returned by the API</li><li>Allow-listed file uploads</li></ul>
+            </div>
+            <div class="sec-card">
+                <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#server"/></svg></div>
+                <h3>Reliability</h3>
+                <ul><li>Concurrent edit protection (409)</li><li>Atomic snapshot refreshes</li><li>Lock against parallel job runs</li><li>Automated tests + CI</li></ul>
+            </div>
+            <div class="sec-card">
+                <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#file-check"/></svg></div>
+                <h3>Clinical records</h3>
+                <ul><li>Signed records are locked</li><li>Corrections only via a new record</li><li>Enforced at the database level</li><li>Every read is logged</li></ul>
+            </div>
+        </div>
+        <div class="sec-banner reveal">
+            <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
+            <div><strong>Silent failure is the real enemy.</strong> The system stops loudly even when something "works, but wrong", and it never automatically retries an uncertain result.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== INTEGRATIONS + IMPLEMENTATION ====== -->
+<section class="section" id="implementation">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Integrations</span>
+            <h2 class="h2">Works with the systems you already run</h2>
+        </div>
+        <div class="integrations reveal">
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>ORIS 5 <small>accounting</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#heart-pulse"/></svg>Hospital information system <small>revenue</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#coins"/></svg>National Bank of Georgia <small>FX rates</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#megaphone"/></svg>Facebook · Instagram · LinkedIn</span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg>Email <small>notifications</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#sheet"/></svg>Excel · PDF · PowerPoint</span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#scan"/></svg>Barcode / QR <small>CODE-128</small></span>
+        </div>
+
+        <div class="section-head reveal mt-xl">
+            <span class="kicker">Implementation</span>
+            <h2 class="h2">A rollout plan that is clear and predictable</h2>
+        </div>
+        <ol class="steps reveal">
+            <li class="step"><h3>Discovery &amp; demo</h3><p>A 15-minute demo focused on your challenges, and choosing the right modules.</p></li>
+            <li class="step"><h3>Configuration</h3><p>Roles, permissions, departments, warehouses and reference data.</p></li>
+            <li class="step"><h3>Data migration</h3><p>Validated Excel import and synchronization with ORIS 5.</p></li>
+            <li class="step"><h3>Training &amp; go-live</h3><p>Team training and rollout into your real processes.</p></li>
+            <li class="step"><h3>Support &amp; growth</h3><p>Direct communication and regular product updates.</p></li>
+        </ol>
+
+        <div class="why-grid reveal">
+            <div class="why"><div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#server"/></svg></div><div><h3>On-premise</h3><p>Runs inside your network, so your data never leaves your organization.</p></div></div>
+            <div class="why"><div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#languages"/></svg></div><div><h3>English &amp; Georgian</h3><p>A bilingual interface; translations are editable without a developer.</p></div></div>
+            <div class="why"><div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#toggle"/></svg></div><div><h3>Modular</h3><p>Start with what you need and expand as you grow.</p></div></div>
+            <div class="why"><div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></div><div><h3>Hands-on support</h3><p>Problems get solved with a call or a message, not a ticket queue.</p></div></div>
+            <div class="why"><div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#zap"/></svg></div><div><h3>Fast delivery</h3><p>New features ship in weeks, not years.</p></div></div>
+            <div class="why"><div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#file-check"/></svg></div><div><h3>Built for local standards</h3><p>ORIS 5, National Bank rates and local reporting requirements, out of the box.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section class="section section-alt" id="pricing">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">Pricing</span>
+            <h2 class="h2">Simple, transparent pricing</h2>
+            <p class="lead">14-day free trial. No credit card required.</p>
+        </div>
+        <div class="pricing-grid reveal">
+            <div class="plan">
+                <h3>Starter</h3>
+                <div class="for">For small teams — assets &amp; operations</div>
+                <div class="price">₾150 <small>/ month</small></div>
+                <div class="yearly">or ₾1,500 / year (2 months free)</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Up to <strong>500</strong> assets, <strong>3</strong> users</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Assets and depreciation</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Inventory counts + barcodes</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Warehouse and stock</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Excel / PDF export</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Email support</span></li>
+                </ul>
+                <a href="#contact" class="btn btn-ghost">Book a demo</a>
+            </div>
+            <div class="plan featured">
+                <span class="tag">Most popular</span>
+                <h3>Professional</h3>
+                <div class="for">For growing companies</div>
+                <div class="price">₾500 <small>/ month</small></div>
+                <div class="yearly">or ₾5,000 / year (2 months free)</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Up to <strong>5,000</strong> assets, <strong>10</strong> users</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Everything in Starter</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Purchase orders and receivables/payables</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>HR, documents, internal messaging</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Incident manager, leads</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>RBAC security</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Priority support</span></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Book a demo</a>
+            </div>
+            <div class="plan">
+                <h3>Enterprise</h3>
+                <div class="for">For large organizations and hospitals</div>
+                <div class="price text">Custom</div>
+                <div class="yearly">Tailored terms</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Unlimited assets and users</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>The full platform — 25 modules</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>ORIS 5 financial reporting, budgeting</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Healthcare modules</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Custom modules and integrations</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>On-site rollout + training</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>SLA guarantee</span></li>
+                </ul>
+                <a href="#contact" class="btn btn-ghost">Contact sales</a>
+            </div>
+        </div>
+        <p class="pricing-note">Prices exclude VAT. Implementation and data migration terms are agreed after the demo.</p>
+    </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="section" id="faq">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">FAQ</span>
+            <h2 class="h2">Frequently asked questions</h2>
+        </div>
+        <div class="faq reveal">
+            <details>
+                <summary>How long does implementation take?</summary>
+                <div class="answer">The core package is typically up and running in 2–3 business days: installation, Excel data import and basic team training. Enterprise deployments follow an individual plan based on the number of modules and integrations.</div>
+            </details>
+            <details>
+                <summary>Is it only for healthcare organizations?</summary>
+                <div class="answer">No. The asset, finance, warehouse, purchasing, HR, document and CRM modules work for any organization. Healthcare modules are optional and enabled only when needed.</div>
+            </details>
+            <details>
+                <summary>Can I enable only the modules I need?</summary>
+                <div class="answer">Yes. Modules can be switched on and off without deleting data. A disabled module's API is closed, the core is protected from being disabled, and you can always switch a module back on.</div>
+            </details>
+            <details>
+                <summary>How does the ORIS 5 integration work?</summary>
+                <div class="answer">AssetFlow Studio reads balances, entries and suppliers from ORIS 5 and stores them as snapshots, refreshed on a schedule or on demand. Heavy aggregation is computed once, so reports open in 80–500 ms. Manual corrections are preserved on every sync.</div>
+            </details>
+            <details>
+                <summary>Can we migrate our existing data?</summary>
+                <div class="answer">Yes. Bulk import from Excel (template-based, with automatic validation and duplicate checks) and from PDF invoices is built in, and we help you structure your data correctly.</div>
+            </details>
+            <details>
+                <summary>Does it need an internet connection?</summary>
+                <div class="answer">No. AssetFlow Studio runs on your own servers (on-premise) and works fully inside your local network. Internet access is only used by external services such as National Bank exchange rates; when offline, the last known rate is used.</div>
+            </details>
+            <details>
+                <summary>What are the technical requirements?</summary>
+                <div class="answer">Server: Windows Server (or Linux) with SQL Server 2019+ and .NET 8. Client: any modern browser (Chrome, Edge, Firefox, Safari). Nothing needs to be installed on user machines.</div>
+            </details>
+            <details>
+                <summary>Which languages are supported?</summary>
+                <div class="answer">English and Georgian. Translations are stored in the database and can be edited without a developer; adding a new language is a single table row.</div>
+            </details>
+            <details>
+                <summary>How many users can work at the same time?</summary>
+                <div class="answer">Starter — 3 users, Professional — 10, Enterprise — unlimited. Every user has individual permissions defined by RBAC.</div>
+            </details>
+            <details>
+                <summary>What happens after the trial?</summary>
+                <div class="answer">The 14-day trial is completely free with every feature available. Afterwards you choose the plan that fits; if it's not right for you, there's no obligation.</div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section class="section contact" id="contact">
+    <div class="container contact-grid">
+        <div class="contact-info reveal">
+            <span class="kicker">Next step</span>
+            <h2 class="h2">Book a free demo</h2>
+            <p class="lead">In a 15-minute demo you'll see how AssetFlow Studio addresses your specific challenges. No obligation.</p>
+            <ul class="contact-list">
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></span><div><small>Phone</small><a href="tel:+995595048283">+995 595 04 82 83</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg></span><div><small>Email</small><a href="mailto:assetsflowstudio@gmail.com">assetsflowstudio@gmail.com</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#facebook"/></svg></span><div><small>Facebook</small><a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener">AssetFlow Studio</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#map-pin"/></svg></span><div><small>Location</small>Tbilisi, Georgia</div></li>
+            </ul>
+        </div>
+
+        <div class="form-card reveal">
+            <h3>Request a demo</h3>
+            <p>Fill in the form and we'll get back to you within one business day.</p>
+            <form id="demoForm" name="demo-request" method="POST" action="/en/thanks.html" data-netlify="true" netlify-honeypot="bot-field"
+                  data-ok="Thank you! Your request has been received — we'll be in touch shortly."
+                  data-err="Something went wrong. Please call us or send an email instead.">
+                <input type="hidden" name="form-name" value="demo-request">
+                <input type="hidden" name="language" value="en">
+                <p class="hp"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+                <div class="form-grid">
+                    <div class="field"><label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+                    <div class="field"><label for="f-org">Organization <span class="req" aria-hidden="true">*</span></label><input id="f-org" name="organization" type="text" autocomplete="organization" required></div>
+                    <div class="field"><label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+                    <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+                    <div class="field"><label for="f-type">Organization type</label>
+                        <select id="f-type" name="org_type">
+                            <option value="">— Select —</option>
+                            <option>Hospital / clinic</option>
+                            <option>Commercial company</option>
+                            <option>Public sector</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="field"><label for="f-interest">Main interest</label>
+                        <select id="f-interest" name="interest">
+                            <option value="">— Select —</option>
+                            <option>Full platform</option>
+                            <option>Finance &amp; reporting</option>
+                            <option>Healthcare modules</option>
+                            <option>Assets &amp; inventory</option>
+                            <option>HR, CRM, communication</option>
+                        </select>
+                    </div>
+                    <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Briefly describe what you need"></textarea></div>
+                    <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>I agree to the processing of my data to arrange a demo, in line with the <a href="/en/privacy.html">privacy policy</a>. <span class="req" aria-hidden="true">*</span></span></label>
+                </div>
+                <button type="submit" class="btn btn-primary">Send request <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></button>
+                <div id="formStatus" class="form-status" role="status" tabindex="-1"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a href="/en/" class="logo"><img src="/favicon.svg" alt="" width="34" height="34"><span>AssetFlow <em>Studio</em></span></a>
+                <p>A modular ERP platform for finance, healthcare operations, assets and people.</p>
+            </div>
+            <div>
+                <h4>Product</h4>
+                <ul><li><a href="#platform">Modules</a></li><li><a href="#features">Features</a></li><li><a href="#screens">Product tour</a></li><li><a href="#whats-new">What's new</a></li></ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li><li><a href="/en/privacy.html">Privacy</a></li></ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul><li><a href="tel:+995595048283">+995 595 04 82 83</a></li><li><a href="mailto:assetsflowstudio@gmail.com">Email</a></li><li><a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener">Facebook</a></li><li><a href="/" hreflang="ka" lang="ka">ქართული</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> AssetFlow Studio. All rights reserved.</span>
+            <span class="tech-line" aria-label="Technology"><span>React 19</span><span>TypeScript</span><span>.NET 8</span><span>SQL Server</span></span>
+        </div>
+    </div>
+</footer>
+
+<!-- ====== LIGHTBOX ====== -->
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged screen view">
+    <figure>
+        <img id="lbImg" alt="">
+        <figcaption><strong id="lbTitle"></strong><span id="lbDesc"></span></figcaption>
+    </figure>
+    <button class="lb-btn lb-close" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#x"/></svg><span class="sr-only">Close</span></button>
+    <button class="lb-btn lb-prev" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#chevron-left"/></svg><span class="sr-only">Previous</span></button>
+    <button class="lb-btn lb-next" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#chevron-right"/></svg><span class="sr-only">Next</span></button>
+</dialog>
+
+</body>
+</html>

@@ -1,1782 +1,939 @@
 <!DOCTYPE html>
-<html lang="ka">
+<html lang="ka" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AssetFlow Studio — ძირითადი საშუალებების მართვის სისტემა</title>
-    <meta name="description" content="AssetFlow Studio — ქართული ERP სისტემა ძირითადი საშუალებების აღრიცხვის, ინვენტარიზაციის, ამორტიზაციის და საწყობის მართვისთვის. შეცვალეთ Excel ავტომატიზებული სისტემით.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="AssetFlow Studio — ძირითადი საშუალებების ERP სისტემა">
-    <meta property="og:description" content="აქტივების აღრიცხვა, ინვენტარიზაცია, ამორტიზაცია და საწყობის მართვა ერთ პლატფორმაზე. ქართული ინტერფეისი, ლოკალური მხარდაჭერა.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AssetFlow Studio — მოდულური ERP ფინანსების, მედიცინის და აქტივების მართვისთვის</title>
+    <meta name="description" content="AssetFlow Studio — ქართული მოდულური ERP პლატფორმა: ფინანსური ანგარიშგება ORIS 5-დან, სამედიცინო შემოსავლები და EBITDA, ძირითადი საშუალებები, ინვენტარიზაცია, საწყობი, HR, CRM და ინციდენტების მართვა ერთ სისტემაში.">
+    <link rel="canonical" href="https://assetsflow.netlify.app/">
+    <link rel="alternate" hreflang="ka" href="https://assetsflow.netlify.app/">
+    <link rel="alternate" hreflang="en" href="https://assetsflow.netlify.app/en/">
+    <link rel="alternate" hreflang="x-default" href="https://assetsflow.netlify.app/">
+    <meta name="theme-color" content="#070b16">
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AssetFlow Studio">
+    <meta property="og:title" content="AssetFlow Studio — ერთი პლატფორმა მთელი ორგანიზაციის მართვისთვის">
+    <meta property="og:description" content="ფინანსები, სამედიცინო ოპერაციები, აქტივები, HR და CRM — ერთ მოდულურ ERP სისტემაში. Version 6.0.">
     <meta property="og:url" content="https://assetsflow.netlify.app/">
-    <meta property="og:image" content="https://assetsflow.netlify.app/images/dashboard.png">
+    <meta property="og:image" content="https://assetsflow.netlify.app/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AssetFlow Studio — მოდულური ERP პლატფორმის დაშბორდი">
     <meta property="og:locale" content="ka_GE">
-    
-    <!-- Twitter Card -->
+    <meta property="og:locale:alternate" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AssetFlow Studio — ძირითადი საშუალებების ERP">
-    <meta name="twitter:description" content="აქტივების მართვის სრული სისტემა ქართული კომპანიებისთვის">
-    <meta name="twitter:image" content="https://assetsflow.netlify.app/images/dashboard.png">
+    <meta name="twitter:title" content="AssetFlow Studio — მოდულური ERP პლატფორმა">
+    <meta name="twitter:description" content="ფინანსები, მედიცინა, აქტივები, HR და CRM — ერთ სისტემაში.">
+    <meta name="twitter:image" content="https://assetsflow.netlify.app/images/og-image.jpg">
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #0f1526;
-            --bg-card: #141b2d;
-            --bg-card-hover: #1a2340;
-            --border: #1e2a45;
-            --border-light: #2a3a5c;
-            --text-primary: #e8ecf4;
-            --text-secondary: #8b95ad;
-            --text-muted: #5a6580;
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --accent-glow: rgba(59, 130, 246, 0.15);
-            --accent-green: #10b981;
-            --accent-green-glow: rgba(16, 185, 129, 0.12);
-            --accent-amber: #f59e0b;
-            --accent-red: #ef4444;
-            --accent-purple: #8b5cf6;
-            --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111b33 50%, #0f1526 100%);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
-            --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.08);
-            --radius: 12px;
-            --radius-lg: 20px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans Georgian', 'DM Sans', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ========== NAVIGATION ========== */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 0 2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 14, 26, 0.8);
-            border-bottom: 1px solid transparent;
-        }
-
-        .nav.scrolled {
-            background: rgba(10, 14, 26, 0.95);
-            border-bottom-color: var(--border);
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 72px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .nav-logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .nav-logo-text {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-cta {
-            background: var(--accent);
-            color: white !important;
-            padding: 9px 22px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s !important;
-        }
-
-        .nav-cta:hover {
-            background: var(--accent-light);
-            transform: translateY(-1px);
-        }
-
-        .nav-mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 2rem 80px;
-            background: var(--gradient-hero);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent-glow);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 0.82rem;
-            color: var(--accent-light);
-            font-weight: 500;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .hero-badge-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-            animation: fadeInUp 0.6s ease 0.1s both;
-        }
-
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--accent-light), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 36px;
-            max-width: 520px;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: all 0.25s ease;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-light);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            background: var(--accent-glow);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 48px;
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-
-        .hero-stat-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .hero-stat-label {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .hero-visual {
-            position: relative;
-            animation: fadeInUp 0.8s ease 0.3s both;
-        }
-
-        .hero-visual img {
-            width: 100%;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-        }
-
-        .hero-visual-badge {
-            position: absolute;
-            bottom: -16px;
-            left: 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .hero-visual-badge-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-green-glow);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .hero-visual-badge-text {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .hero-visual-badge-sub {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* ========== SECTION SHARED ========== */
-        section {
-            padding: 100px 2rem;
-        }
-
-        .section-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 640px;
-            line-height: 1.8;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 64px;
-        }
-
-        .section-header .section-subtitle {
-            margin: 0 auto;
-        }
-
-        /* ========== PROBLEM SECTION ========== */
-        .problem {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 48px;
-        }
-
-        .problem-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--accent-red);
-            transform: translateY(-2px);
-        }
-
-        .problem-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-red), var(--accent-amber));
-        }
-
-        .problem-icon {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-        }
-
-        .problem-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .problem-card p {
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            line-height: 1.7;
-        }
-
-        /* ========== SOLUTION / MODULES ========== */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .module-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .module-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .module-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .module-card:hover::after {
-            opacity: 1;
-        }
-
-        .module-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-        }
-
-        .module-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .module-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .module-features {
-            list-style: none;
-            margin-top: 16px;
-        }
-
-        .module-features li {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            padding: 4px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .module-features li::before {
-            content: '✓';
-            color: var(--accent-green);
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        /* ========== SCREENSHOTS ========== */
-        .screenshots {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .screenshots-filter {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
-        }
-
-        .screenshot-card {
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .screenshot-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .screenshot-card img {
-            width: 100%;
-            display: block;
-        }
-
-        .screenshot-info {
-            padding: 16px 20px;
-        }
-
-        .screenshot-info h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .screenshot-info span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(8px);
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .lightbox-close:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .lightbox-nav:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .lightbox-prev { left: 24px; }
-        .lightbox-next { right: 24px; }
-
-        /* ========== BENEFITS / WHY US ========== */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .benefits-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .benefit-item {
-            display: flex;
-            gap: 16px;
-            padding: 20px;
-            border-radius: var(--radius);
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .benefit-item:hover {
-            border-color: var(--accent);
-        }
-
-        .benefit-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .benefit-item h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .benefit-item p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* ========== PRICING ========== */
-        .pricing {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 36px 32px;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--accent);
-            box-shadow: 0 0 60px rgba(59, 130, 246, 0.1);
-            transform: scale(1.04);
-        }
-
-        .pricing-card.featured::before {
-            content: 'პოპულარული';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 16px;
-            border-radius: 20px;
-        }
-
-        .pricing-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .pricing-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .pricing-price {
-            font-size: 2.4rem;
-            font-weight: 800;
-            font-family: 'DM Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-
-        .pricing-price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        .pricing-period {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 28px;
-        }
-
-        .pricing-features li {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--accent-green);
-            font-weight: 700;
-        }
-
-        .pricing-btn {
-            width: 100%;
-            text-align: center;
-            justify-content: center;
-        }
-
-        /* ========== FAQ ========== */
-        .faq-list {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 12px;
-            overflow: hidden;
-            background: var(--bg-card);
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            text-align: left;
-        }
-
-        .faq-question:hover {
-            color: var(--accent-light);
-        }
-
-        .faq-chevron {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-            color: var(--text-muted);
-        }
-
-        .faq-item.open .faq-chevron {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-answer-inner {
-            padding: 0 24px 20px;
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            line-height: 1.8;
-        }
-
-        .faq-item.open .faq-answer {
-            max-height: 300px;
-        }
-
-        /* ========== CTA / CONTACT ========== */
-        .cta-section {
-            text-align: center;
-            background: var(--gradient-hero);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .cta-box {
-            position: relative;
-            z-index: 1;
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        .cta-box h2 {
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .cta-box p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            margin-bottom: 36px;
-            line-height: 1.8;
-        }
-
-        .cta-actions {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-contact-info {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            margin-top: 48px;
-            flex-wrap: wrap;
-        }
-
-        .cta-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-        }
-
-        .cta-contact-item a {
-            color: var(--accent-light);
-            text-decoration: none;
-        }
-
-        .cta-contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        /* ========== TECH STACK (minimal) ========== */
-        .tech-strip {
-            padding: 40px 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .tech-strip-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .tech-strip p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .tech-tags {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .tech-tag {
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-        }
-
-        /* ========== FOOTER ========== */
-        .footer {
-            padding: 40px 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-copy {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-links a {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-light);
-        }
-
-        /* ========== ANIMATIONS ========== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="preload" as="image" href="/images/screens/cash-flow.webp" fetchpriority="high">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="/assets/js/main.js" defer></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://assetsflow.netlify.app/#org",
+                "name": "AssetFlow Studio",
+                "url": "https://assetsflow.netlify.app/",
+                "logo": "https://assetsflow.netlify.app/images/icon-512.png",
+                "email": "assetsflowstudio@gmail.com",
+                "telephone": "+995595048283",
+                "address": { "@type": "PostalAddress", "addressLocality": "Tbilisi", "addressCountry": "GE" },
+                "sameAs": ["https://www.facebook.com/profile.php?id=61577590663221"]
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "AssetFlow Studio",
+                "applicationCategory": "BusinessApplication",
+                "applicationSubCategory": "ERP",
+                "operatingSystem": "Web browser; server: Windows Server / Linux",
+                "softwareVersion": "6.0",
+                "inLanguage": ["ka", "en"],
+                "description": "მოდულური ERP პლატფორმა: ფინანსური ანგარიშგება, სამედიცინო შემოსავლები, ძირითადი საშუალებები, ინვენტარიზაცია, საწყობი, HR, CRM და ინციდენტების მართვა.",
+                "screenshot": "https://assetsflow.netlify.app/images/screens/cash-flow.webp",
+                "publisher": { "@id": "https://assetsflow.netlify.app/#org" },
+                "offers": { "@type": "Offer", "price": "150", "priceCurrency": "GEL", "description": "სტარტერი — თვიური გამოწერა" }
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 1024px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-subtitle {
-                margin: 0 auto 36px;
-            }
-
-            .hero-actions {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-visual {
-                max-width: 600px;
-                margin: 0 auto;
-            }
-
-            .modules-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 420px;
-            }
-
-            .pricing-card.featured {
-                transform: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-mobile-toggle {
-                display: block;
-            }
-
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: var(--bg-primary);
-                border-bottom: 1px solid var(--border);
-                padding: 20px;
-                gap: 12px;
-            }
-
-            section {
-                padding: 64px 1.25rem;
-            }
-
-            .modules-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .screenshots-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
-                gap: 24px;
-            }
-
-            .cta-contact-info {
-                flex-direction: column;
-                gap: 16px;
-                align-items: center;
-            }
-        }
-    </style>
+        ]
+    }
+    </script>
 </head>
 
 <body>
+<a class="skip-link" href="#main">გადასვლა ძირითად შინაარსზე</a>
 
 <!-- ====== NAVIGATION ====== -->
-<nav class="nav" id="nav">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo">
-            <div class="nav-logo-icon">AF</div>
-            <span class="nav-logo-text">AssetFlow Studio</span>
+<header class="nav" id="nav">
+    <div class="container nav-inner">
+        <a href="/" class="logo" aria-label="AssetFlow Studio — მთავარი">
+            <img src="/favicon.svg" alt="" width="34" height="34">
+            <span>AssetFlow <em>Studio</em></span>
         </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#problem">პრობლემა</a></li>
-            <li><a href="#modules">შესაძლებლობები</a></li>
-            <li><a href="#screenshots">ინტერფეისი</a></li>
-            <li><a href="#pricing">ფასები</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact" class="nav-cta">დემოს მოთხოვნა</a></li>
-        </ul>
-        <button class="nav-mobile-toggle" id="mobileToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+        <nav aria-label="მთავარი ნავიგაცია">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#platform">პლატფორმა</a></li>
+                <li><a href="#features">შესაძლებლობები</a></li>
+                <li><a href="#screens">ინტერფეისი</a></li>
+                <li><a href="#whats-new">სიახლეები</a></li>
+                <li><a href="#pricing">ფასები</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <a class="lang-switch" href="/en/" hreflang="en" lang="en"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#globe"/></svg>EN<span class="sr-only"> — English version</span></a>
+            <a href="#contact" class="btn btn-primary btn-sm">დემოს მოთხოვნა</a>
+            <button class="nav-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false">
+                <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#menu"/></svg>
+                <span class="sr-only">მენიუ</span>
+            </button>
+        </div>
     </div>
-</nav>
+</header>
+
+<main id="main">
 
 <!-- ====== HERO ====== -->
-<section class="hero" id="hero">
-    <div class="hero-inner">
+<section class="hero">
+    <div class="container hero-inner">
         <div class="hero-content">
-            <div class="hero-badge">
-                <span class="hero-badge-dot"></span>
-                ქართული ERP სისტემა
-            </div>
-            <h1>
-                შეცვალეთ <span class="highlight">Excel-ის ცხრილები</span> ავტომატიზებული აქტივების მართვით
-            </h1>
-            <p class="hero-subtitle">
-                აქტივების აღრიცხვა, ინვენტარიზაცია, ამორტიზაცია, საწყობის მართვა და შეკვეთები — ერთ სისტემაში. შექმნილია ქართული კომპანიებისთვის.
+            <a class="eyebrow" href="#whats-new"><b>v6.0</b> ახალი: ფინანსური ანგარიშგება და ბიუჯეტი →</a>
+            <h1>ერთი პლატფორმა.<br><span class="grad">მთელი ორგანიზაციის</span> მართვისთვის.</h1>
+            <p class="hero-lead">
+                AssetFlow Studio აერთიანებს ფინანსურ, ბუღალტრულ, სამედიცინო, აქტივების, ინვენტარის, საწყობის, HR, CRM და მარკეტინგის პროცესებს ერთ ციფრულ სივრცეში. ცოცხალი მონაცემები Excel-ის ცხრილების ნაცვლად.
             </p>
             <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">
-                    🎯 უფასო დემო მოთხოვნა
-                </a>
-                <a href="#screenshots" class="btn btn-secondary">
-                    ნახეთ სისტემა →
-                </a>
+                <a href="#contact" class="btn btn-primary">უფასო დემოს მოთხოვნა <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></a>
+                <a href="#screens" class="btn btn-ghost"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#play"/></svg> ნახეთ სისტემა</a>
             </div>
-            <div class="hero-stats">
-                <div>
-                    <div class="hero-stat-value">9</div>
-                    <div class="hero-stat-label">მოდული</div>
-                </div>
-                <div>
-                    <div class="hero-stat-value">50K+</div>
-                    <div class="hero-stat-label">აქტივის ტევადობა</div>
-                </div>
-                <div>
-                    <div class="hero-stat-value">80+</div>
-                    <div class="hero-stat-label">API ფუნქცია</div>
-                </div>
+            <div class="hero-note">
+                <span><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg>On-premise — მონაცემები თქვენს სერვერზე</span>
+                <span><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg>ქართული და ინგლისური</span>
             </div>
         </div>
         <div class="hero-visual">
-            <img src="images/dashboard.png" alt="AssetFlow Studio დეშბორდი" loading="eager">
-            <div class="hero-visual-badge">
-                <div class="hero-visual-badge-icon">🔒</div>
-                <div>
-                    <div class="hero-visual-badge-text">RBAC უსაფრთხოება</div>
-                    <div class="hero-visual-badge-sub">როლებზე დაფუძნებული წვდომა</div>
+            <div class="browser">
+                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>AssetFlow Studio · ფინანსური დაშბორდი</span></div>
+                <img src="/images/screens/cash-flow.webp" width="1338" height="557" alt="ORIS 5 ფინანსური დაშბორდი — ფულადი ნაკადები, საწყისი და საბოლოო ნაშთი, ფულის ნაშთის დინამიკა" fetchpriority="high">
+            </div>
+            <div class="float-card float-a">
+                <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg></div>
+                <div><strong>IAS 7 — ფულადი ნაკადები</strong><small>ნაშთის შეჯერება — სხვაობა 0.00</small></div>
+            </div>
+            <div class="float-card float-b">
+                <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg></div>
+                <div><strong>280 permission-კოდი</strong><small>როლებზე დაფუძნებული წვდომა</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROOF ====== -->
+<section class="proof" aria-labelledby="proof-title">
+    <div class="container">
+        <h2 class="proof-title" id="proof-title">მუშაობს რეალურ, მსხვილ საწარმოო გარემოში</h2>
+        <div class="proof-grid">
+            <div class="proof-item"><strong>25</strong><span>მოდული ერთ პლატფორმაზე</span></div>
+            <div class="proof-item"><strong>1 800+</strong><span>თანამშრომლის HR რეესტრი</span></div>
+            <div class="proof-item"><strong>8 000+</strong><span>ძირითადი საშუალება</span></div>
+            <div class="proof-item"><strong>1 076</strong><span>სამედიცინო აპარატი ალარმებით</span></div>
+            <div class="proof-item"><strong>3 100</strong><span>კონტრაგენტი ORIS 5-დან</span></div>
+            <div class="proof-item"><strong>755K</strong><span>ბუღალტრული გატარება 2018 წლიდან</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROBLEM → OUTCOME ====== -->
+<section class="section" id="why">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">ნაცნობი სურათი?</span>
+            <h2 class="h2">Excel-ი, ცალკე პროგრამები და ხელით აწყობილი ანგარიშები — დაბადებიდან მეორე დღეს უკვე მცდარი</h2>
+            <p class="lead">AssetFlow Studio ცვლის მიმოფანტულ ფაილებს ერთი წყაროთი, რომელიც ყოველთვის აქტუალურია.</p>
+        </div>
+        <div class="problem-grid reveal">
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>60-ფურცლიანი ბიუჯეტის Excel</h3>
+                <p>ვერსიები ფოსტით მოძრაობს, ფორმულები იშლება, ვინ რა შეცვალა — უცნობია.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>ბიუჯეტი სცენარებით, ვერსიის დამტკიცებით და ჩაკეტვით</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>ფინანსური ანგარიშგება ხელით</h3>
+                <p>მოგება-ზარალი და ფულადი ნაკადები ყოველთვიურად თავიდან იწყობა ბუღალტრული ამონაწერებიდან.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>ცოცხალი ანგარიშგება პირდაპირ ORIS 5-ის ბაზიდან</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>შემოსავლების ანალიზი ცალკე BI-ში</h3>
+                <p>განყოფილებების შემოსავალი და ხარჯი სხვადასხვა წყაროშია და ერთმანეთს არ ემთხვევა.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>განყოფილებების EBITDA, რომლის ჯამი = ORIS-ის EBITDA</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>ინვენტარიზაცია ქაღალდზე</h3>
+                <p>დღეები იხარჯება ჩამონათვალების შედარებაზე, დანაკლისი გვიან ვლინდება.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>კამერით სკანირება და ავტომატური დისკრეპანსიის რეპორტი</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>აპარატის შემოწმების ვადა ვიღაცის მეხსიერებაშია</h3>
+                <p>მეინთენანსი გამოტოვებულია, სანამ აპარატი არ გაჩერდება.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>ალარმები 90 / 30 / 7 დღით ადრე პასუხისმგებელ ინჟინერს</div>
+            </article>
+            <article class="problem-card">
+                <div class="before"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#alert"/></svg>ადრე</div>
+                <h3>„ვინ შეცვალა?“ — პასუხი არ არის</h3>
+                <p>ყველას ყველაფერზე აქვს წვდომა, ცვლილებების ისტორია არ ინახება.</p>
+                <div class="after"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>RBAC, 280 უფლება და მოქმედებების ჟურნალი</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PLATFORM / MODULES ====== -->
+<section class="section section-alt" id="platform">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">პლატფორმა</span>
+            <h2 class="h2">25 მოდული — ჩართეთ მხოლოდ ის, რაც გჭირდებათ</h2>
+            <p class="lead">მოდულები ირთვება და ითიშება მონაცემების დაკარგვის გარეშე. ბირთვი დაცულია, ხოლო უკან ჩართვის გზა ყოველთვის რჩება.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="მოდულების ჯგუფები">
+            <button class="tab" role="tab" id="tab-fin" aria-controls="panel-fin"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg>ფინანსები</button>
+            <button class="tab" role="tab" id="tab-med" aria-controls="panel-med"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#heart-pulse"/></svg>სამედიცინო</button>
+            <button class="tab" role="tab" id="tab-ops" aria-controls="panel-ops"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#box"/></svg>აქტივები და ოპერაციები</button>
+            <button class="tab" role="tab" id="tab-team" aria-controls="panel-team"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#users"/></svg>გუნდი და CRM</button>
+            <button class="tab" role="tab" id="tab-core" aria-controls="panel-core"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#layers"/></svg>პლატფორმა</button>
+        </div>
+
+        <!-- Finance -->
+        <div class="tab-panel" role="tabpanel" id="panel-fin" aria-labelledby="tab-fin">
+            <h3 class="panel-title">ფინანსები</h3>
+            <p class="panel-intro">ბუღალტრული მონაცემები ORIS 5-დან — ანალიზისთვის მზა სახით, ყოველდღიურად განახლებული.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <span class="badge-new">ახალი</span>
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#line-chart"/></svg></div>
+                    <h3>ფინანსური ანგარიშგება (ORIS 5)</h3>
+                    <p>მოგება-ზარალი, ფულადი ნაკადები და ფინანსური დაშბორდი ერთ გვერდზე.</p>
+                    <ul><li>P&amp;L შენიშვნების ჩაშლით გატარებამდე</li><li>ფულადი ნაკადები — IAS 7, პირდაპირი მეთოდი</li><li>EBITDA ბრიჯი, FCF, runway</li><li>PDF · Excel · PowerPoint</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">ახალი</span>
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#target"/></svg></div>
+                    <h3>ბიუჯეტი და ფულის დაგეგმარება</h3>
+                    <p>ბიუჯეტი სცენარებით და ფულის ფორქასთი სეზონურობის გათვალისწინებით.</p>
+                    <ul><li>სცენარები T0 / LE / T1 / T2</li><li>მუხლები მფლობელი მენეჯერებით</li><li>ვერსიის დამტკიცება და ჩაკეტვა</li><li>სალაროების შედარება და ანგარიში</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#wallet"/></svg></div>
+                    <h3>დავალიანებების მართვა</h3>
+                    <p>დებიტორული და კრედიტორული დავალიანება — ბუღალტრული, სამედიცინო და ფიზიკური პირები.</p>
+                    <ul><li>ვადიანობა: 0–30 / 31–60 / 61–90 / 180+</li><li>გადახდის კალენდარი და გეგმა</li><li>დამზღვევების ჭრილი, პრეტენზიები</li><li>ნაწილობრივი გადახდები</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#link"/></svg></div>
+                    <h3>ORIS 5 ინტეგრაცია</h3>
+                    <p>ბრუნვითი უწყისი, ამონაწერები და მომწოდებლები — ჯამი ემთხვევა მთავარ წიგნს.</p>
+                    <ul><li>3 100 კონტრაგენტის სინქრონიზაცია</li><li>გადახდის ვადები და რეკვიზიტები</li><li>შესყიდვების ანალიტიკა მომწოდებლებით</li><li>სნეპშოტები — პასუხი 80–500 მწ</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">ახალი</span>
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#coins"/></svg></div>
+                    <h3>ვალუტის კურსები</h3>
+                    <p>ეროვნული ბანკის კურსები ავტომატურად — ლოგინის გვერდზევე.</p>
+                    <ul><li>USD, EUR — ისტორია თარიღებით</li><li>ინტერნეტის გარეშე — ბოლო ცნობილი კურსი</li><li>ხელით შესწორება, ორიგინალის შენახვით</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Medical -->
+        <div class="tab-panel" role="tabpanel" id="panel-med" aria-labelledby="tab-med">
+            <h3 class="panel-title">სამედიცინო</h3>
+            <p class="panel-intro">კლინიკისა და ჰოსპიტლის სპეციფიკური პროცესები — რეგისტრაციიდან ანგარიშსწორებამდე.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <span class="badge-new">ახალი</span>
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#trending-up"/></svg></div>
+                    <h3>სამედიცინო შემოსავლები და EBITDA</h3>
+                    <p>ჰოსპიტალური სოფტი + ORIS 5 — ცალკე BI ინსტრუმენტის გარეშე.</p>
+                    <ul><li>ამბულატორია და სტაციონარი განყოფილებებით</li><li>ნეტ შემოსავალი სადაზღვევო ფასდაკლებით</li><li>ხარჯების გადანაწილება განყოფილებებზე</li><li>ხელმძღვანელის ანგარიში: PDF + Excel</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#stethoscope"/></svg></div>
+                    <h3>სამედიცინო შემთხვევები</h3>
+                    <p>პაციენტის რეესტრი, ელექტრონული ისტორიები, აფთიაქი და ფინანსები ერთ ნაკადში.</p>
+                    <ul><li>დუბლიკატის აცილება — ძებნა ფორმამდე</li><li>ხელმოწერილი ჩანაწერი იბლოკება</li><li>აფთიაქი: პარტიები, ვადები, FEFO</li><li>რამდენიმე გადამხდელი ერთ შემთხვევაზე</li></ul>
+                </article>
+                <article class="module">
+                    <span class="badge-new">ახალი</span>
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#activity"/></svg></div>
+                    <h3>სამედიცინო აპარატურის რეესტრი</h3>
+                    <p>შემოწმება, მეინთენანსი და რემონტი — ალარმებით.</p>
+                    <ul><li>1 076 აპარატი, სრული ისტორია</li><li>გაფრთხილება 90 / 30 / 7 დღით ადრე</li><li>ერთი წერილი ინჟინერს ყველა აპარატით</li><li>ORIS 5-თან მიბმა ინვენტარის N-ით</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></div>
+                    <h3>ქოლბექები: რადიოლოგი → ქირურგი → ქოლცენტრი</h3>
+                    <p>შემთხვევის სრული ტაიმლაინი ყველა ეტაპზე — აქტიური და პასიური შემთხვევებით.</p>
+                    <ul><li>კვლევების და დარეკვების ისტორია</li><li>ქირურგებზე ელ-ფოსტის შეჯამებები</li><li>სტაციონარში დაბრუნებულების კონტროლი</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Assets & operations -->
+        <div class="tab-panel" role="tabpanel" id="panel-ops" aria-labelledby="tab-ops">
+            <h3 class="panel-title">აქტივები და ოპერაციები</h3>
+            <p class="panel-intro">ძირითადი საშუალებების სრული სასიცოცხლო ციკლი — შესყიდვიდან ჩამოწერამდე.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#box"/></svg></div>
+                    <h3>აქტივების მართვა</h3>
+                    <p>7-სექციანი ფორმა, იერარქია (მშობელი აქტივი) და პაკეტური ოპერაციები.</p>
+                    <ul><li>ფინანსები, გარანტია, დანართები</li><li>სიცოცხლის ვადის გაგრძელება</li><li>პაკეტური სტატუსის ცვლილება</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#trending-down"/></svg></div>
+                    <h3>ამორტიზაცია</h3>
+                    <p>თვიური დარიცხვები ავტომატურად — ჯამურად ან ინდივიდუალურად.</p>
+                    <ul><li>Straight-Line, Declining Balance, Units of Production</li><li>თვის / სესიის / აქტივის გაუქმება</li><li>30 000+ ისტორიული ჩანაწერი</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#scan"/></svg></div>
+                    <h3>ინვენტარიზაცია</h3>
+                    <p>სესიები მთელ კომპანიაზე ან დეპარტამენტზე — კამერით სკანირებით.</p>
+                    <ul><li>ბარკოდის ამოცნობა + ხმოვანი სიგნალი</li><li>აკლია / ზედმეტია / შესაბამისია</li><li>რეპორტი Excel + PDF, არქივი</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#warehouse"/></svg></div>
+                    <h3>საწყობი და მარაგები</h3>
+                    <p>მრავალი საწყობი და მარაგის მოძრაობა რეალურ დროში.</p>
+                    <ul><li>მიღება, გაცემა, გადატანა, დაბრუნება</li><li>მინიმალური მარაგის გაფრთხილება</li><li>მომწოდებლის მიბმა</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#cart"/></svg></div>
+                    <h3>შეკვეთები</h3>
+                    <p>შესყიდვის ციკლი — მოთხოვნიდან მომწოდებელთან გადაგზავნამდე.</p>
+                    <ul><li>Workflow დამტკიცებით</li><li>პოზიციების ცალკე განხილვა</li><li>დოკუმენტები, კომენტარები, ისტორია</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#upload"/></svg></div>
+                    <h3>იმპორტი და მონაცემთა შეტანა</h3>
+                    <p>გადმოიტანეთ არსებული მონაცემები წუთებში.</p>
+                    <ul><li>Excel შაბლონი ვალიდაციით</li><li>PDF ზედდებულიდან აქტივების შექმნა</li><li>Barcode / QR (CODE-128) ბეჭდვა</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Team & CRM -->
+        <div class="tab-panel" role="tabpanel" id="panel-team" aria-labelledby="tab-team">
+            <h3 class="panel-title">გუნდი და CRM</h3>
+            <p class="panel-intro">ადამიანები, კომუნიკაცია და გაყიდვები — იმავე სისტემაში, იმავე უფლებებით.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#users"/></svg></div>
+                    <h3>პერსონალი (HR)</h3>
+                    <p>საშტატო განრიგიდან ლიცენზიის კონტროლამდე.</p>
+                    <ul><li>სამუშაო ადგილები, თანამდებობები, FTE</li><li>ხელშეკრულების ვადები</li><li>სამედიცინო ლიცენზიის გაფრთხილება 60 დღით ადრე</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#wrench"/></svg></div>
+                    <h3>ინციდენტ მენეჯერი (ITIL)</h3>
+                    <p>გაუმართაობების აღრიცხვა SLA ტაიმერებით.</p>
+                    <ul><li>პრიორიტეტი: Impact × Urgency მატრიცა</li><li>დარღვეული SLA სიაში წითლდება</li><li>აპარატის მოცდენა და აღდგენის კოდები</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#folder"/></svg></div>
+                    <h3>დოკუმენტაციის მენეჯმენტი</h3>
+                    <p>იერარქიული საქაღალდეები და ვერსიების ისტორია.</p>
+                    <ul><li>მოქმედების ვადა და თეგები</li><li>საჯარო / შიდა / კონფიდენციალური</li><li>იგივე წესი ფაილის ბმულზეც</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#message"/></svg></div>
+                    <h3>შიდა მიმოწერა</h3>
+                    <p>პირადი და ჯგუფური საუბრები დანართებით.</p>
+                    <ul><li>პასუხი, რედაქტირება, წაკითხვის ნიშნული</li><li>ადმინისთვის „ყველაფრის ნახვა“ განზრახ არ არსებობს</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#headset"/></svg></div>
+                    <h3>ლიდები და ქოლცენტრი</h3>
+                    <p>CRM — ლიდების იმპორტი Excel-იდან და აგენტის დაფა.</p>
+                    <ul><li>ზარების სტატისტიკა</li><li>სტატუსები და შენიშვნები</li><li>პაკეტური ოპერაციები, ექსპორტი</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#megaphone"/></svg></div>
+                    <h3>სოციალური მედია და მარკეტინგი</h3>
+                    <p>დაგეგმვიდან გამოქვეყნებამდე — Facebook, Instagram, LinkedIn.</p>
+                    <ul><li>კონტენტის კალენდარი და კამპანიები</li><li>დამტკიცების ნაკადი ჟურნალით</li><li>ავტომატური გამოქვეყნება განრიგით</li></ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Platform core -->
+        <div class="tab-panel" role="tabpanel" id="panel-core" aria-labelledby="tab-core">
+            <h3 class="panel-title">პლატფორმა</h3>
+            <p class="panel-intro">საერთო საფუძველი, რომელზეც ყველა მოდული დგას.</p>
+            <div class="module-grid">
+                <article class="module">
+                    <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg></div>
+                    <h3>RBAC უსაფრთხოება</h3>
+                    <p>როლები + permission-კოდები — დინამიური მენიუ უფლებების მიხედვით.</p>
+                    <ul><li>280 permission-კოდი, 25+ როლი</li><li>ღილაკის დონეზე კონტროლი</li><li>მოქმედებების ჟურნალი</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#toggle"/></svg></div>
+                    <h3>მოდულების მართვა</h3>
+                    <p>ჩართვა / გამორთვა მონაცემების წაშლის გარეშე.</p>
+                    <ul><li>გამორთული მოდულის API დახურულია</li><li>ბირთვი დაცულია გამორთვისგან</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#languages"/></svg></div>
+                    <h3>ენების პაკეტი</h3>
+                    <p>ქართული და ინგლისური — თარგმანები ბაზაში, არა კოდში.</p>
+                    <ul><li>რედაქტირება პროგრამისტის გარეშე</li><li>ახალი ენა — ერთი ჩანაწერი ცხრილში</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#bar-chart"/></svg></div>
+                    <h3>რეპორტების კატალოგი</h3>
+                    <p>ყველა რეპორტი ერთ ადგილას, მენიუს იერარქიით.</p>
+                    <ul><li>ფერადი Excel ყველა რეპორტზე</li><li>შედარება ყოველთვის: ძველი → ახალი</li><li>PDF ხელმძღვანელისთვის</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#clock"/></svg></div>
+                    <h3>ფონური სერვისები</h3>
+                    <p>ავტო-განახლებები განრიგით და ელ-ფოსტის დაგზავნა.</p>
+                    <ul><li>ბოლო გაშვების სტატუსი, ხელით გაშვება</li><li>პარალელური გაშვების ლოქი</li></ul>
+                </article>
+                <article class="module">
+                    <div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#search"/></svg></div>
+                    <h3>ძებნა, თემები, ხელმისაწვდომობა</h3>
+                    <p>ინტერფეისი მომხმარებელს ერგება — არა პირიქით.</p>
+                    <ul><li>გლობალური ძებნა Ctrl+K — უფლებების დაცვით</li><li>5 თემა, ფონტის ზომა, კონტრასტი</li><li>ლათინურით აკრეფაც პოულობს ქართულს</li></ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FEATURE SPOTLIGHTS ====== -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">შესაძლებლობები</span>
+            <h2 class="h2">გადაწყვეტილებები ცოცხალ მონაცემებზე</h2>
+            <p class="lead">ყოველი ციფრი დაკლიკებადია — ჯამიდან ერთ გატარებამდე.</p>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">ფინანსური დაშბორდი · ORIS 5</span>
+                <h3>Excel-ი აღარ ძველდება</h3>
+                <p>ოთხი ORIS მოდული ერთ გვერდზე: მოგება-ზარალი, ფულადი ნაკადები, დავალიანებები და ძირითადი საშუალებები — იგივე ფორმულებით, რაც რეპორტებში.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>755 ათასი გატარება 2018 წლიდან <span>— შენიშვნა → ანგარიში → გატარება</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ფულადი ნაკადები IAS 7-ით <span>— ნაშთის შეჯერება, სხვაობა 0.00</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>მმართველობითი კორექტირებები <span>— შედარება წინა წლის იმავე პერიოდთან</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ექსპორტი PDF, Excel, PowerPoint <span>— Excel თქვენი FS ფაილის ფორმით</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/finance-overview.webp" data-title="ORIS 5 — ფინანსური დაშბორდი" data-desc="შემოსავალი, EBITDA, საოპერაციო და წმინდა მოგება, ფულადი ნაკადი და დავალიანებები">
+                    <span class="browser"><img src="/images/screens/finance-overview-sm.webp" srcset="/images/screens/finance-overview-sm.webp 720w, /images/screens/finance-overview.webp 1332w" sizes="(max-width: 960px) 100vw, 640px" width="1332" height="563" loading="lazy" alt="ფინანსური დაშბორდი KPI ბარათებით: შემოსავალი, EBITDA, საოპერაციო მოგება, წმინდა მოგება"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">სამედიცინო შემოსავლები</span>
+                <h3>განყოფილებების EBITDA — ცალკე BI ინსტრუმენტის გარეშე</h3>
+                <p>ჰოსპიტალური სოფტის და ORIS 5-ის მონაცემები ერთად: ამბულატორია და სტაციონარი, ბარათები, ზრდის ლიდერები და ხარჯების გადანაწილება.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>განყოფილებების ჯამი ყოველთვის = ORIS-ის EBITDA <span>— სხვაობა ცალკე სტრიქონად ჩანს</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ნეტ შემოსავალი <span>— სადაზღვევო ფასდაკლებების შემდეგ</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ხელმძღვანელის ანგარიში <span>— PDF ~20 გვერდი დასკვნებით, Excel 8 ფურცელი</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/medical-revenue-dynamics.webp" data-title="სამედიცინო შემოსავლები — დინამიკა" data-desc="შემოსავალი თვეების მიხედვით, კუმულატიური შედარება წინა პერიოდთან">
+                    <span class="browser"><img src="/images/screens/medical-revenue-dynamics-sm.webp" srcset="/images/screens/medical-revenue-dynamics-sm.webp 720w, /images/screens/medical-revenue-dynamics.webp 1332w" sizes="(max-width: 960px) 100vw, 640px" width="1332" height="554" loading="lazy" alt="სამედიცინო შემოსავლების ანალიტიკა: ამბულატორია და სტაციონარი თვეების მიხედვით"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">ძირითადი საშუალებები</span>
+                <h3>აქტივები და ამორტიზაცია — ავტომატურად, აუდიტისთვის მზად</h3>
+                <p>ყოველი აქტივის ისტორია, თვიური დარიცხვები და ბალანსური ღირებულება ჯგუფების ჭრილში — ერთი დაკლიკებით.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ცვეთის 3 სტანდარტული + Custom მეთოდი</div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>პაკეტური გაუქმება <span>— თვის, სესიის ან აქტივის მიხედვით</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ჯგუფების ანალიტიკა <span>— ღირებულება, ნარჩენი, ცვეთის ხარისხი</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/depreciation.webp" data-title="ამორტიზაციის ისტორია" data-desc="დარიცხვები აქტივების მიხედვით, ფილტრები და პაკეტური გაუქმება">
+                    <span class="browser"><img src="/images/screens/depreciation-sm.webp" srcset="/images/screens/depreciation-sm.webp 720w, /images/screens/depreciation.webp 1341w" sizes="(max-width: 960px) 100vw, 640px" width="1341" height="555" loading="lazy" alt="ამორტიზაციის ისტორიის გვერდი სტატისტიკის ბარათებით და დარიცხვების ცხრილით"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">ინვენტარიზაცია</span>
+                <h3>ტელეფონის კამერა — ბარკოდის სკანერად</h3>
+                <p>გახსენით სესია, სკანირეთ აქტივები და სისტემა თავად აჩვენებს, რა აკლია, რა არის ზედმეტი და რა ემთხვევა.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ავტომატური ამოცნობა <span>— ხმოვანი სიგნალით</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>დისკრეპანსიის რეპორტი <span>— PDF და Excel</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>სესიების არქივი <span>— წინა ინვენტარიზაციები არ იკარგება</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/inventory-discrepancy.webp" data-title="ინვენტარიზაცია — დისკრეპანსიის რეპორტი" data-desc="სულ აქტივი, სკანირებული, აკლია, ზედმეტია, შესაბამისია">
+                    <span class="browser"><img src="/images/screens/inventory-discrepancy-sm.webp" srcset="/images/screens/inventory-discrepancy-sm.webp 720w, /images/screens/inventory-discrepancy.webp 1334w" sizes="(max-width: 960px) 100vw, 640px" width="1334" height="557" loading="lazy" alt="ინვენტარიზაციის დისკრეპანსიის რეპორტი: აკლია, ზედმეტია და შესაბამისი აქტივები"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reveal">
+            <div class="spot-text">
+                <span class="kicker">ინციდენტ მენეჯერი</span>
+                <h3>ITIL-ის პრაქტიკა — „ყველაფერი კრიტიკულია“ აღარ გამოგივათ</h3>
+                <p>პრიორიტეტი ხელით არ ინიშნება — ითვლება გავლენისა და სასწრაფოობის მატრიციდან. SLA ფორმაშივე ჩანს.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>კრიტიკული — 15 წთ / 4 სთ <span>· მაღალი — 1 სთ / 8 სთ · საშუალო — 4 სთ / 24 სთ</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>აპარატის მოცდენის აღრიცხვა <span>— და მასშტაბური ინციდენტები</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ფოტო-დანართები და აღდგენის კოდები <span>— სტატისტიკისთვის</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/incident-manager.webp" data-title="ინციდენტ მენეჯერი" data-desc="ინციდენტის ბარათი: სტატუსი, პრიორიტეტი, აღდგენის ვადა და SLA">
+                    <span class="browser"><img src="/images/screens/incident-manager-sm.webp" srcset="/images/screens/incident-manager-sm.webp 720w, /images/screens/incident-manager.webp 1351w" sizes="(max-width: 960px) 100vw, 640px" width="1351" height="574" loading="lazy" alt="ინციდენტის ბარათი პრიორიტეტით, SLA ვადით და ტექნიკური სამსახურის მინიჭებით"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spot reverse reveal">
+            <div class="spot-text">
+                <span class="kicker">პერსონალიზაცია</span>
+                <h3>ხუთი თემა, ორი ენა, ერთი კოდი</h3>
+                <p>თითოეული მომხმარებელი თავად ირჩევს თემას, ფონტის ზომას, ეკრანის სიხშირეს და ხელმისაწვდომობის პარამეტრებს.</p>
+                <ul class="checks">
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>გაძლიერებული კონტრასტი და ფოკუსის ხილვადობა</div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>ანიმაციების შემცირება <span>— ოპერაციული სისტემის პარამეტრებს მიჰყვება</span></div></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check-circle"/></svg><div>გლობალური ძებნა Ctrl+K <span>— მენიუ, ქვემენიუ და მონაცემები ერთად</span></div></li>
+                </ul>
+            </div>
+            <div class="spot-media">
+                <button type="button" data-full="/images/screens/personalization.webp" data-title="სისტემის პარამეტრები — პერსონალიზაცია" data-desc="თემა, ენა, ფონტის ზომა, ეკრანის სიხშირე, აქცენტის ფერი და ხელმისაწვდომობა">
+                    <span class="browser"><img src="/images/screens/personalization-sm.webp" srcset="/images/screens/personalization-sm.webp 720w, /images/screens/personalization.webp 1361w" sizes="(max-width: 960px) 100vw, 640px" width="1361" height="561" loading="lazy" alt="პერსონალიზაციის პანელი: თემები, ენა, ფონტის ზომა და აქცენტის ფერი"></span>
+                    <span class="sr-only">გადიდება</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== SCREENSHOT GALLERY ====== -->
+<section class="section section-alt" id="screens">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">ინტერფეისი</span>
+            <h2 class="h2">ნახეთ, როგორ გამოიყურება</h2>
+            <p class="lead">რეალური ეკრანები Version 6.0-დან. კონფიდენციალური მონაცემები დაფარულია.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="ეკრანების ფილტრი">
+            <button class="tab" data-filter="all" aria-pressed="true">ყველა</button>
+            <button class="tab" data-filter="finance" aria-pressed="false">ფინანსები</button>
+            <button class="tab" data-filter="medical" aria-pressed="false">სამედიცინო</button>
+            <button class="tab" data-filter="ops" aria-pressed="false">აქტივები და ოპერაციები</button>
+            <button class="tab" data-filter="admin" aria-pressed="false">ადმინისტრირება</button>
+        </div>
+
+        <div class="gallery">
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-overview.webp" data-title="ფინანსური დაშბორდი — მიმოხილვა" data-desc="შემოსავალი, EBITDA, მოგება, ფულადი ნაკადი, დავალიანებები"><img src="/images/screens/finance-overview-sm.webp" width="720" height="304" loading="lazy" alt="ფინანსური დაშბორდის მიმოხილვა"><figcaption><strong>ფინანსური დაშბორდი — მიმოხილვა</strong><span>შემოსავალი, EBITDA, მოგება, დავალიანებები</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-charts.webp" data-title="შემოსავალი, EBITDA და ხარჯების სტრუქტურა" data-desc="თვიური დინამიკა, ფულადი ნაკადები სამ სექციად, ხარჯების სტრუქტურა"><img src="/images/screens/finance-charts-sm.webp" width="720" height="303" loading="lazy" alt="შემოსავლის, EBITDA-ს და ხარჯების დიაგრამები"><figcaption><strong>შემოსავალი, EBITDA, ხარჯები</strong><span>თვიური დინამიკა და სტრუქტურა</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/cash-flow.webp" data-title="ფულადი ნაკადები" data-desc="საწყისი და საბოლოო ნაშთი, FCF, საოპერაციო, საინვესტიციო და საფინანსო ნაკადები"><img src="/images/screens/cash-flow-sm.webp" width="720" height="300" loading="lazy" alt="ფულადი ნაკადების ტაბი"><figcaption><strong>ფულადი ნაკადები (IAS 7)</strong><span>ნაშთი, FCF, ნაკადები სექციებით</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/receivables.webp" data-title="დებიტორული დავალიანება" data-desc="დაძველება FIFO-თი, პერიოდის ბრუნვა, ვადაგადაცილებული ნაშთი"><img src="/images/screens/receivables-sm.webp" width="720" height="300" loading="lazy" alt="დებიტორული დავალიანების ანალიზი"><figcaption><strong>დებიტორული დავალიანება</strong><span>დაძველება FIFO-თი და ბრუნვა</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/payables.webp" data-title="კრედიტორული დავალიანება — ORIS 5" data-desc="ღია ვალდებულებები გადახდის ვადების მიხედვით"><img src="/images/screens/payables-sm.webp" width="720" height="303" loading="lazy" alt="კრედიტორული დავალიანება გადახდის ვადებით"><figcaption><strong>კრედიტორული დავალიანება</strong><span>გადახდის ვადები, კალენდარი, გეგმა</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/payers.webp" data-title="გადამხდელები" data-desc="შემოსავალი გადამხდელების ჭრილში, სადაზღვევო კომპანიების დინამიკა"><img src="/images/screens/payers-sm.webp" width="720" height="309" loading="lazy" alt="შემოსავალი გადამხდელების ჭრილში"><figcaption><strong>გადამხდელების ჭრილი</strong><span>დამზღვევები და კატეგორიები</span></figcaption></button></figure>
+            <figure class="shot" data-category="finance"><button type="button" data-full="/images/screens/finance-aging.webp" data-title="ვადიანობა და ძირითადი საშუალებები" data-desc="დებიტორული და კრედიტორული ვადების მიხედვით, ძირითადი საშუალებები ჯგუფებით"><img src="/images/screens/finance-aging-sm.webp" width="720" height="303" loading="lazy" alt="დებიტორული და კრედიტორული დავალიანების ვადიანობა"><figcaption><strong>ვადიანობა და აქტივების ჯგუფები</strong><span>დებიტორული vs კრედიტორული</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-revenue.webp" data-title="განყოფილებების შემოსავლები" data-desc="ამბულატორია + სტაციონარი, შედარება წინა წლის იმავე პერიოდთან"><img src="/images/screens/medical-revenue-sm.webp" width="720" height="295" loading="lazy" alt="განყოფილებების სრული შემოსავლების რეპორტი"><figcaption><strong>განყოფილებების შემოსავლები</strong><span>ამბულატორია + სტაციონარი</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-revenue-dynamics.webp" data-title="სამედიცინო შემოსავლები — დინამიკა" data-desc="შემოსავალი თვეებით და კუმულატიური შედარება"><img src="/images/screens/medical-revenue-dynamics-sm.webp" width="720" height="299" loading="lazy" alt="სამედიცინო შემოსავლების დინამიკა"><figcaption><strong>შემოსავლების დინამიკა</strong><span>თვეებით და კუმულატიურად</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/medical-equipment.webp" data-title="სამედიცინო აპარატურის რეესტრი" data-desc="შემოწმება, მეინთენანსი, ალარმები და ORIS 5-თან მიბმა"><img src="/images/screens/medical-equipment-sm.webp" width="720" height="300" loading="lazy" alt="სამედიცინო აპარატურის რეესტრი"><figcaption><strong>აპარატურის რეესტრი</strong><span>ვადები, ალარმები, ინჟინრები</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/patient-registration.webp" data-title="პაციენტის რეგისტრაცია" data-desc="ახალი პაციენტი — პირადი ნომრის გარეშეც (უცხოელი, ახალშობილი)"><img src="/images/screens/patient-registration-sm.webp" width="720" height="296" loading="lazy" alt="პაციენტის რეგისტრაციის ფორმა"><figcaption><strong>პაციენტის რეგისტრაცია</strong><span>დუბლიკატის აცილებით</span></figcaption></button></figure>
+            <figure class="shot" data-category="medical"><button type="button" data-full="/images/screens/incident-manager.webp" data-title="ინციდენტ მენეჯერი" data-desc="ITIL პრიორიტეტი და SLA"><img src="/images/screens/incident-manager-sm.webp" width="720" height="306" loading="lazy" alt="ინციდენტის ბარათი"><figcaption><strong>ინციდენტ მენეჯერი</strong><span>ITIL პრიორიტეტი და SLA</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/fixed-assets-analytics.webp" data-title="ძირითადი საშუალებები ჯგუფებით" data-desc="ღირებულება, ნარჩენი, თვიური ცვეთა და შემოსვლები პერიოდში"><img src="/images/screens/fixed-assets-analytics-sm.webp" width="720" height="303" loading="lazy" alt="ძირითადი საშუალებების ანალიტიკა ჯგუფებით"><figcaption><strong>ძირითადი საშუალებები</strong><span>ჯგუფები, ნარჩენი, ცვეთა</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/depreciation.webp" data-title="ამორტიზაციის ისტორია" data-desc="დარიცხვები, ფილტრები, პაკეტური გაუქმება"><img src="/images/screens/depreciation-sm.webp" width="720" height="298" loading="lazy" alt="ამორტიზაციის ისტორია"><figcaption><strong>ამორტიზაციის ისტორია</strong><span>დარიცხვები და ექსპორტი</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/inventory-scan.webp" data-title="ინვენტარიზაცია — სკანირება" data-desc="კამერით სკანირება ან ხელით შეყვანა"><img src="/images/screens/inventory-scan-sm.webp" width="720" height="298" loading="lazy" alt="ინვენტარიზაციის სკანირების გვერდი"><figcaption><strong>ინვენტარიზაცია — სკანირება</strong><span>კამერა ან ხელით შეყვანა</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/inventory-discrepancy.webp" data-title="დისკრეპანსიის რეპორტი" data-desc="აკლია, ზედმეტია, შესაბამისია — PDF და Excel"><img src="/images/screens/inventory-discrepancy-sm.webp" width="720" height="301" loading="lazy" alt="დისკრეპანსიის რეპორტი"><figcaption><strong>დისკრეპანსიის რეპორტი</strong><span>აკლია / ზედმეტია / შესაბამისია</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/orders.webp" data-title="შეკვეთების მართვა" data-desc="შესყიდვების ციკლი — მოთხოვნიდან მომწოდებელთან გადაგზავნამდე"><img src="/images/screens/orders-sm.webp" width="720" height="301" loading="lazy" alt="შეკვეთების სია სტატუსებით"><figcaption><strong>შეკვეთები</strong><span>სტატუსები, ბიუჯეტი, ვადები</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/stock.webp" data-title="მარაგები" data-desc="მარაგი საწყობების მიხედვით, დაბალი მარაგის გაფრთხილება"><img src="/images/screens/stock-sm.webp" width="720" height="296" loading="lazy" alt="მარაგის დეტალური ჩვენება"><figcaption><strong>მარაგები</strong><span>საწყობები და დაბალი მარაგი</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/suppliers.webp" data-title="მომწოდებლები" data-desc="რეკვიზიტები, კონტაქტები, საბანკო მონაცემები, ORIS-იდან განახლება"><img src="/images/screens/suppliers-sm.webp" width="720" height="299" loading="lazy" alt="მომწოდებლის დამატების ფორმა"><figcaption><strong>მომწოდებლები</strong><span>ORIS 5-თან სინქრონიზაცია</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/hr-employees.webp" data-title="პერსონალი" data-desc="თანამშრომლების რეესტრი, FTE, სამუშაო ადგილები, თანამდებობები"><img src="/images/screens/hr-employees-sm.webp" width="720" height="302" loading="lazy" alt="პერსონალის რეესტრი"><figcaption><strong>პერსონალი (HR)</strong><span>რეესტრი, FTE, თანამდებობები</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/messaging.webp" data-title="შიდა მიმოწერა" data-desc="პირადი და ჯგუფური საუბრები დანართებით"><img src="/images/screens/messaging-sm.webp" width="720" height="298" loading="lazy" alt="შიდა მიმოწერის გვერდი"><figcaption><strong>შიდა მიმოწერა</strong><span>პირადი და ჯგუფური</span></figcaption></button></figure>
+            <figure class="shot" data-category="ops"><button type="button" data-full="/images/screens/social-media.webp" data-title="სოციალური მედია და მარკეტინგი" data-desc="დაკავშირებული გვერდები, ტოკენის ვადა, კონტენტის კალენდარი"><img src="/images/screens/social-media-sm.webp" width="720" height="293" loading="lazy" alt="სოციალური მედიის მოდული"><figcaption><strong>სოციალური მედია</strong><span>Facebook, Instagram, LinkedIn</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/home.webp" data-title="მთავარი გვერდი" data-desc="მოდულების მიმოხილვა და სწრაფი ნავიგაცია"><img src="/images/screens/home-sm.webp" width="720" height="301" loading="lazy" alt="მთავარი გვერდი მოდულების ბარათებით"><figcaption><strong>მთავარი გვერდი</strong><span>მოდულების მიმოხილვა</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/login.webp" data-title="შესვლის გვერდი" data-desc="ეროვნული ბანკის კურსები, ინტერნეტის სიჩქარე, ERP მოდულების მიმოხილვა"><img src="/images/screens/login-sm.webp" width="720" height="318" loading="lazy" alt="შესვლის გვერდი"><figcaption><strong>შესვლის გვერდი</strong><span>კურსები და სიჩქარის ტესტი</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/roles.webp" data-title="როლების მართვა" data-desc="25 როლი და მათი უფლებების კონფიგურაცია"><img src="/images/screens/roles-sm.webp" width="720" height="299" loading="lazy" alt="როლების მართვის გვერდი"><figcaption><strong>როლების მართვა</strong><span>RBAC კონფიგურაცია</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/system-settings.webp" data-title="სისტემის პარამეტრები" data-desc="ლოგირება, სისტემური ლოგები, როლები, უფლებები, ფონური სერვისები"><img src="/images/screens/system-settings-sm.webp" width="720" height="302" loading="lazy" alt="სისტემის პარამეტრების გვერდი"><figcaption><strong>სისტემის პარამეტრები</strong><span>ადმინისტრირება ერთ ადგილას</span></figcaption></button></figure>
+            <figure class="shot" data-category="admin"><button type="button" data-full="/images/screens/personalization.webp" data-title="პერსონალიზაცია" data-desc="თემები, ენა, ფონტი, ხელმისაწვდომობა"><img src="/images/screens/personalization-sm.webp" width="720" height="297" loading="lazy" alt="პერსონალიზაციის პანელი"><figcaption><strong>პერსონალიზაცია</strong><span>თემები და ხელმისაწვდომობა</span></figcaption></button></figure>
+        </div>
+    </div>
+</section>
+
+<!-- ====== WHAT'S NEW ====== -->
+<section class="section" id="whats-new">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">სიახლეები</span>
+            <h2 class="h2">რა შეიცვალა Version 6.0-ში</h2>
+            <p class="lead">პლატფორმა მუდმივად ვითარდება რეალური მომხმარებლების საჭიროებებზე.</p>
+        </div>
+        <div class="release reveal">
+            <aside class="release-card">
+                <div class="ver">v6.0</div>
+                <div class="date">სექტემბერი 2026</div>
+                <div class="release-stats">
+                    <div><strong>+53K</strong><span>ხაზი კოდი</span></div>
+                    <div><strong>+83</strong><span>API</span></div>
+                    <div><strong>+36</strong><span>ცხრილი</span></div>
+                </div>
+                <small>19 დღეში — გაზომილია, არა შეფასებული (10 სექტემბრის ვერსიასთან შედარებით).</small>
+            </aside>
+            <div class="release-groups">
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#sparkles"/></svg>ახალი მიმართულებები</h3>
+                    <ul><li>ფინანსური ანგარიშგება ORIS 5-დან</li><li>სამედიცინო შემოსავლები და EBITDA</li><li>ბიუჯეტი და ფულის ფორქასთი</li><li>სამედიცინო აპარატურის რეესტრი</li></ul>
+                </div>
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#palette"/></svg>ინტერფეისი</h3>
+                    <ul><li>ფერადი Excel ყველა რეპორტზე</li><li>შედარება ყოველთვის: ძველი → ახალი</li><li>შესვლის ახალი გვერდი + კურსები</li><li>სიჩქარის ტესტი ჰედერში</li></ul>
+                </div>
+                <div class="release-group">
+                    <h3><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#refresh"/></svg>ოპერაციები</h3>
+                    <ul><li>ქოლბექები: აქტიური / პასიური</li><li>სტაციონარში დაბრუნებულები</li><li>ალარმები ინჟინრებზე</li><li>ვალუტის ავტო-სინქრონიზაცია</li></ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ====== PROBLEM ====== -->
-<section class="problem" id="problem">
-    <div class="section-inner">
-        <div class="section-header fade-in">
-            <div class="section-label">⚠️ ნაცნობი პრობლემა?</div>
-            <h2 class="section-title">Excel-ით აქტივების მართვა<br>დროს კარგავს და შეცდომებს ბადებს</h2>
-            <p class="section-subtitle">
-                ქართული კომპანიების უმეტესობა აქტივებს Excel-ში აღრიცხავს. ეს იწვევს სერიოზულ პრობლემებს:
-            </p>
+<!-- ====== SECURITY ====== -->
+<section class="section section-alt" id="security">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">უსაფრთხოება და მდგრადობა</span>
+            <h2 class="h2">თქვენი მონაცემები — თქვენს სერვერზე, მკაცრი კონტროლით</h2>
+            <p class="lead">აგვისტო–სექტემბერში 2026 პლატფორმამ უსაფრთხოების სრული გამკაცრება გაიარა.</p>
         </div>
-        <div class="problem-grid">
-            <div class="problem-card fade-in">
-                <div class="problem-icon">⏰</div>
-                <h3>დროის ხარჯვა</h3>
-                <p>ხელით შეყვანა, ფორმულების შემოწმება, მონაცემების გადატანა — თვეში ათეულობით საათი იხარჯება რუტინულ სამუშაოზე.</p>
+        <div class="sec-grid reveal">
+            <div class="sec-card">
+                <div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#lock"/></svg></div>
+                <h3>წვდომა</h3>
+                <ul><li>ყველა endpoint დაცულია by default</li><li>280 permission-კოდი</li><li>ატვირთული ფაილიც — ავტორიზაციით</li><li>ბაზასთან შეზღუდული უფლების ლოგინი</li></ul>
             </div>
-            <div class="problem-card fade-in">
-                <div class="problem-icon">❌</div>
-                <h3>შეცდომები და არასწორი მონაცემები</h3>
-                <p>ადამიანური შეცდომები Excel-ში — წაშლილი ფორმულები, დუბლიკატები, მოძველებული ინფორმაცია. აუდიტის დროს პრობლემა გარდაუვალია.</p>
+            <div class="sec-card">
+                <div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#key"/></svg></div>
+                <h3>საიდუმლოები</h3>
+                <ul><li>პაროლები კოდსა და Git-ში აღარ ინახება</li><li>სოც-ქსელის ტოკენები დაშიფრულია</li><li>ტოკენი უკან არასოდეს ბრუნდება</li><li>ფაილის ატვირთვა — თეთრი სიით</li></ul>
             </div>
-            <div class="problem-card fade-in">
-                <div class="problem-icon">🔍</div>
-                <h3>ინვენტარიზაციის სირთულე</h3>
-                <p>ხელით ინვენტარიზაცია — ქაღალდი, ჩანაწერები, შედარება. პროცესი მძიმეა, დისკრეპანსიები ვერ იკვეთება დროულად.</p>
+            <div class="sec-card">
+                <div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#server"/></svg></div>
+                <h3>საიმედოობა</h3>
+                <ul><li>კონკურენტული რედაქტირების დაცვა (409)</li><li>ატომური სნეპშოტების განახლება</li><li>პარალელური გაშვების ლოქი</li><li>ავტო-ტესტები + CI</li></ul>
             </div>
-            <div class="problem-card fade-in">
-                <div class="problem-icon">📊</div>
-                <h3>ამორტიზაციის გაანგარიშება</h3>
-                <p>Straight-Line, Declining Balance, Units of Production — ყველა მეთოდის ხელით გამოთვლა და განახლება რთული და შეცდომისმომტანია.</p>
+            <div class="sec-card">
+                <div class="ic t-red"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#file-check"/></svg></div>
+                <h3>კლინიკური ჩანაწერები</h3>
+                <ul><li>ხელმოწერილი ჩანაწერი იბლოკება</li><li>შესწორება — მხოლოდ ახალი ჩანაწერით</li><li>დაცვა ბაზის დონეზე</li><li>ყოველი წაკითხვა აღირიცხება</li></ul>
             </div>
-            <div class="problem-card fade-in">
-                <div class="problem-icon">🏭</div>
-                <h3>საწყობის კონტროლი</h3>
-                <p>რამდენი აქტივია თითოეულ საწყობში? რა გადატანილია? რა შემოვიდა? Excel ვერ პასუხობს რეალურ დროში.</p>
-            </div>
-            <div class="problem-card fade-in">
-                <div class="problem-icon">👥</div>
-                <h3>წვდომის კონტროლის არარსებობა</h3>
-                <p>ყველა თანამშრომელს ყველაფერთან აქვს წვდომა. ვინ შეცვალა რა? ვინ წაშალა მონაცემი? — Excel-ს ეს არ ახსოვს.</p>
-            </div>
+        </div>
+        <div class="sec-banner reveal">
+            <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
+            <div><strong>ჩუმი მარცხი — მთავარი მტერი.</strong> სისტემა ხმამაღლა ჩერდება მაშინაც, როცა „მუშაობს, მაგრამ არასწორად“ — და გაურკვეველ შედეგს ავტომატურად არასოდეს იმეორებს.</div>
         </div>
     </div>
 </section>
 
-<!-- ====== MODULES ====== -->
-<section id="modules">
-    <div class="section-inner">
-        <div class="section-header fade-in">
-            <div class="section-label">💡 გადაწყვეტა</div>
-            <h2 class="section-title">ერთი სისტემა — ყველა საჭიროებისთვის</h2>
-            <p class="section-subtitle">
-                AssetFlow Studio აერთიანებს 9 მოდულს, რომელიც ფარავს ძირითადი საშუალებების მართვის სრულ ციკლს.
-            </p>
+<!-- ====== INTEGRATIONS + IMPLEMENTATION ====== -->
+<section class="section" id="implementation">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">ინტეგრაციები</span>
+            <h2 class="h2">მუშაობს იმ სისტემებთან, რომლებიც უკვე გაქვთ</h2>
         </div>
-        <div class="modules-grid">
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(59,130,246,0.12)">📦</div>
-                <h3>აქტივების მართვა</h3>
-                <p>სრული აღრიცხვა — ფინანსური მონაცემები, კლასიფიკაცია, დანართები. პაკეტური ოპერაციები და ვადის გაგრძელება.</p>
-                <ul class="module-features">
-                    <li>7 სექციანი დეტალური ფორმა</li>
-                    <li>პაკეტური დამუშავება</li>
-                    <li>სტატუსების მართვა</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(16,185,129,0.12)">📋</div>
-                <h3>ინვენტარიზაცია</h3>
-                <p>კამერით ბარკოდის სკანირება, ავტომატური შედარება, დისკრეპანსიების აღმოჩენა — Excel/PDF ექსპორტით.</p>
-                <ul class="module-features">
-                    <li>ბარკოდ სკანერი (კამერა)</li>
-                    <li>ხმოვანი უკუკავშირი</li>
-                    <li>დისკრეპანსიების ანალიზი</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(139,92,246,0.12)">📉</div>
-                <h3>ამორტიზაცია</h3>
-                <p>ავტომატური გაანგარიშება სამი სტანდარტული და Custom მეთოდით. ისტორია, პაკეტური განახლება, PDF ექსპორტი.</p>
-                <ul class="module-features">
-                    <li>Straight-Line / Declining / UoP</li>
-                    <li>ავტო-გაანგარიშება</li>
-                    <li>საგადასახადო ანგარიშგება</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(245,158,11,0.12)">🏭</div>
-                <h3>საწყობის მართვა</h3>
-                <p>მრავალი საწყობი, მოძრაობების აღრიცხვა — შემოსვლა, გასვლა, გადატანა. რეალურ დროში მარაგის კონტროლი.</p>
-                <ul class="module-features">
-                    <li>მრავალსაწყობიანი სისტემა</li>
-                    <li>მოძრაობის ისტორია</li>
-                    <li>რეალურ დროში მარაგი</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(239,68,68,0.12)">🛒</div>
-                <h3>შეკვეთები</h3>
-                <p>სრული Workflow — მოთხოვნიდან შესრულებამდე. დოკუმენტების ატვირთვა, კომენტარები, Email შეტყობინებები.</p>
-                <ul class="module-features">
-                    <li>5 საფეხურიანი Workflow</li>
-                    <li>დოკუმენტები და კომენტარები</li>
-                    <li>ავტო-შეტყობინებები</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(59,130,246,0.12)">📞</div>
-                <h3>ლიდები & ქოლცენტრი</h3>
-                <p>CRM მოდული — ლიდების იმპორტი Excel-იდან, აგენტების დაშბორდი, სტატისტიკა და რეალურ დროში მონიტორინგი.</p>
-                <ul class="module-features">
-                    <li>Excel-იდან იმპორტი</li>
-                    <li>აგენტის დაშბორდი</li>
-                    <li>სტატისტიკა და ანალიტიკა</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(16,185,129,0.12)">🔐</div>
-                <h3>RBAC უსაფრთხოება</h3>
-                <p>როლებზე დაფუძნებული წვდომის კონტროლი. ყველა მოქმედება ფიქსირდება — ვინ, რა, როდის.</p>
-                <ul class="module-features">
-                    <li>როლები და უფლებები</li>
-                    <li>აუდიტის ჟურნალი</li>
-                    <li>JWT ავთენტიფიკაცია</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(245,158,11,0.12)">📥</div>
-                <h3>მონაცემების იმპორტი</h3>
-                <p>მასობრივი იმპორტი Excel-იდან. ვალიდაცია, დუბლიკატების შემოწმება — გადასვლა ძველი სისტემიდან სწრაფად.</p>
-                <ul class="module-features">
-                    <li>Excel ფაილის იმპორტი</li>
-                    <li>ავტო-ვალიდაცია</li>
-                    <li>დუბლიკატების ფილტრაცია</li>
-                </ul>
-            </div>
-            <div class="module-card fade-in">
-                <div class="module-icon" style="background: rgba(139,92,246,0.12)">📊</div>
-                <h3>ანგარიშგება</h3>
-                <p>დეტალური რეპორტები — სტატისტიკა, ამორტიზაცია, აქტივობა. Excel და PDF ექსპორტი ერთი დაკლიკებით.</p>
-                <ul class="module-features">
-                    <li>მრავალფეროვანი ანგარიშები</li>
-                    <li>Excel / PDF ექსპორტი</li>
-                    <li>ვიზუალური ანალიტიკა</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ====== SCREENSHOTS ====== -->
-<section class="screenshots" id="screenshots">
-    <div class="section-inner">
-        <div class="section-header fade-in">
-            <div class="section-label">🖥️ ინტერფეისი</div>
-            <h2 class="section-title">ნახეთ როგორ მუშაობს</h2>
-            <p class="section-subtitle">
-                თანამედროვე, ინტუიციური ინტერფეისი — თქვენი გუნდი მოკლე დროში აითვისებს.
-            </p>
+        <div class="integrations reveal">
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>ORIS 5 <small>ბუღალტერია</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#heart-pulse"/></svg>ჰოსპიტალური სოფტი <small>შემოსავლები</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#coins"/></svg>საქართველოს ეროვნული ბანკი <small>კურსები</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#megaphone"/></svg>Facebook · Instagram · LinkedIn</span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg>ელ-ფოსტა <small>შეტყობინებები</small></span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#sheet"/></svg>Excel · PDF · PowerPoint</span>
+            <span class="chip"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#scan"/></svg>Barcode / QR <small>CODE-128</small></span>
         </div>
 
-        <div class="screenshots-filter">
-            <button class="filter-btn active" data-filter="all">ყველა</button>
-            <button class="filter-btn" data-filter="main">ძირითადი</button>
-            <button class="filter-btn" data-filter="ops">ოპერაციები</button>
-            <button class="filter-btn" data-filter="admin">ადმინისტრირება</button>
+        <div class="section-head reveal mt-xl">
+            <span class="kicker">დანერგვა</span>
+            <h2 class="h2">გაშვების გეგმა — გამჭვირვალე და პროგნოზირებადი</h2>
         </div>
+        <ol class="steps reveal">
+            <li class="step"><h3>გაცნობა და დემო</h3><p>15-წუთიანი დემო თქვენს გამოწვევებზე და საჭირო მოდულების შერჩევა.</p></li>
+            <li class="step"><h3>კონფიგურაცია</h3><p>როლები, უფლებები, დეპარტამენტები, საწყობები და ცნობარები.</p></li>
+            <li class="step"><h3>მონაცემების გადმოტანა</h3><p>Excel იმპორტი ვალიდაციით და ORIS 5-თან სინქრონიზაცია.</p></li>
+            <li class="step"><h3>ტრენინგი და გაშვება</h3><p>გუნდის სწავლება და ჩაშვება რეალურ პროცესებში.</p></li>
+            <li class="step"><h3>მხარდაჭერა და განვითარება</h3><p>პირდაპირი კომუნიკაცია ქართულად და რეგულარული განახლებები.</p></li>
+        </ol>
 
-        <div class="screenshots-grid" id="screenshotsGrid">
-            <!-- Populated by JS -->
-        </div>
-    </div>
-</section>
-
-<!-- ====== WHY US ====== -->
-<section id="benefits">
-    <div class="section-inner">
-        <div class="benefits-grid">
-            <div class="fade-in">
-                <div class="section-label">🏆 რატომ AssetFlow?</div>
-                <h2 class="section-title">შექმნილია ქართული ბაზრისთვის</h2>
-                <p class="section-subtitle" style="margin-bottom: 32px;">
-                    არა ადაპტირებული უცხოური პროდუქტი — არამედ თავიდან აგებული ქართული კომპანიების საჭიროებებზე.
-                </p>
-                <img src="images/assets.png" alt="აქტივების სია" style="width: 100%; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-lg);" loading="lazy">
-            </div>
-            <div class="benefits-list fade-in">
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background: rgba(59,130,246,0.12)">🇬🇪</div>
-                    <div>
-                        <h4>ქართული ინტერფეისი</h4>
-                        <p>სრულად ქართულ ენაზე. არ არის საჭირო თარგმანი ან ადაპტაცია — თქვენი გუნდისთვის ნატურალური გამოცდილება.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background: rgba(16,185,129,0.12)">🔒</div>
-                    <div>
-                        <h4>ლოკალური სერვერი — თქვენი მონაცემები თქვენთან</h4>
-                        <p>სისტემა ეშვება თქვენს შიდა ქსელში. მონაცემები არ გადის ინტერნეტში — მაქსიმალური უსაფრთხოება.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background: rgba(245,158,11,0.12)">⚡</div>
-                    <div>
-                        <h4>სწრაფი დანერგვა</h4>
-                        <p>2-3 დღეში სისტემა მზად არის. მონაცემების იმპორტი Excel-იდან, გუნდის ტრენინგი — ყველაფერი შედის.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background: rgba(139,92,246,0.12)">📞</div>
-                    <div>
-                        <h4>ლოკალური მხარდაჭერა</h4>
-                        <p>პირდაპირი კომუნიკაცია ქართულ ენაზე. პრობლემის გადაწყვეტა — არა ტიკეტი, არამედ ზარი ან მესიჯი.</p>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background: rgba(239,68,68,0.12)">📋</div>
-                    <div>
-                        <h4>საგადასახადო თავსებადობა</h4>
-                        <p>ამორტიზაციის გაანგარიშება ქართული საგადასახადო კოდექსის მოთხოვნებთან შესაბამისობაში.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="why-grid reveal">
+            <div class="why"><div class="ic t-blue"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#server"/></svg></div><div><h3>On-premise</h3><p>სისტემა ეშვება თქვენს შიდა ქსელში — მონაცემები თქვენთან რჩება.</p></div></div>
+            <div class="why"><div class="ic t-green"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#languages"/></svg></div><div><h3>ქართული და ინგლისური</h3><p>ორენოვანი ინტერფეისი; თარგმანები რედაქტირდება პროგრამისტის გარეშე.</p></div></div>
+            <div class="why"><div class="ic t-purple"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#toggle"/></svg></div><div><h3>მოდულური</h3><p>ჩართეთ მხოლოდ საჭირო — გაფართოვდით ზრდასთან ერთად.</p></div></div>
+            <div class="why"><div class="ic t-amber"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></div><div><h3>ლოკალური მხარდაჭერა</h3><p>პრობლემის გადაწყვეტა — არა ტიკეტით, არამედ ზარით ან მესიჯით.</p></div></div>
+            <div class="why"><div class="ic t-cyan"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#zap"/></svg></div><div><h3>სწრაფი განვითარება</h3><p>ახალი ფუნქციები კვირებში და არა წლებში.</p></div></div>
+            <div class="why"><div class="ic t-pink"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#file-check"/></svg></div><div><h3>ქართულ სტანდარტებზე მორგებული</h3><p>ORIS 5, ეროვნული ბანკის კურსები და ადგილობრივი ანგარიშგება.</p></div></div>
         </div>
     </div>
 </section>
 
 <!-- ====== PRICING ====== -->
-<section class="pricing" id="pricing">
-    <div class="section-inner">
-        <div class="section-header fade-in">
-            <div class="section-label">💰 ფასები</div>
-            <h2 class="section-title">გამჭვირვალე ფასწარმოქმნა</h2>
-            <p class="section-subtitle">
-                14 დღის უფასო საცდელი პერიოდი. საკრედიტო ბარათი არ არის საჭირო.
-            </p>
+<section class="section section-alt" id="pricing">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">ფასები</span>
+            <h2 class="h2">გამჭვირვალე ფასწარმოქმნა</h2>
+            <p class="lead">14 დღის უფასო საცდელი პერიოდი. საკრედიტო ბარათი არ არის საჭირო.</p>
         </div>
-        <div class="pricing-grid">
-            <div class="pricing-card fade-in">
-                <div class="pricing-name">სტარტერი</div>
-                <div class="pricing-desc">მცირე გუნდისთვის</div>
-                <div class="pricing-price">150₾ <span>/ თვე</span></div>
-                <div class="pricing-period">ან 1,500₾ / წელი (2 თვე უფასო)</div>
-                <ul class="pricing-features">
-                    <li>500 აქტივამდე</li>
-                    <li>3 მომხმარებელი</li>
-                    <li>ძირითადი მოდულები</li>
-                    <li>ამორტიზაციის გაანგარიშება</li>
-                    <li>Excel / PDF ექსპორტი</li>
-                    <li>Email მხარდაჭერა</li>
+        <div class="pricing-grid reveal">
+            <div class="plan">
+                <h3>სტარტერი</h3>
+                <div class="for">მცირე გუნდისთვის — აქტივები და ოპერაციები</div>
+                <div class="price">150₾ <small>/ თვე</small></div>
+                <div class="yearly">ან 1 500₾ / წელი (2 თვე უფასო)</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span><strong>500</strong> აქტივამდე, <strong>3</strong> მომხმარებელი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>აქტივები და ამორტიზაცია</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>ინვენტარიზაცია + ბარკოდი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>საწყობი და მარაგები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Excel / PDF ექსპორტი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Email მხარდაჭერა</span></li>
                 </ul>
-                <a href="#contact" class="btn btn-secondary pricing-btn">დემოს მოთხოვნა</a>
+                <a href="#contact" class="btn btn-ghost">დემოს მოთხოვნა</a>
             </div>
-            <div class="pricing-card featured fade-in">
-                <div class="pricing-name">პროფესიონალი</div>
-                <div class="pricing-desc">მზარდი კომპანიისთვის</div>
-                <div class="pricing-price">500₾ <span>/ თვე</span></div>
-                <div class="pricing-period">ან 5,000₾ / წელი (2 თვე უფასო)</div>
-                <ul class="pricing-features">
-                    <li>5,000 აქტივამდე</li>
-                    <li>10 მომხმარებელი</li>
-                    <li>ყველა 9 მოდული</li>
-                    <li>ინვენტარიზაცია + ბარკოდი</li>
-                    <li>საწყობის მართვა</li>
-                    <li>RBAC უსაფრთხოება</li>
-                    <li>პრიორიტეტული მხარდაჭერა</li>
+            <div class="plan featured">
+                <span class="tag">პოპულარული</span>
+                <h3>პროფესიონალი</h3>
+                <div class="for">მზარდი კომპანიისთვის</div>
+                <div class="price">500₾ <small>/ თვე</small></div>
+                <div class="yearly">ან 5 000₾ / წელი (2 თვე უფასო)</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span><strong>5 000</strong> აქტივამდე, <strong>10</strong> მომხმარებელი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>ყველაფერი სტარტერიდან</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>შეკვეთები და დავალიანებები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>HR, დოკუმენტები, შიდა მიმოწერა</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>ინციდენტ მენეჯერი, ლიდები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>RBAC უსაფრთხოება</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>პრიორიტეტული მხარდაჭერა</span></li>
                 </ul>
-                <a href="#contact" class="btn btn-primary pricing-btn">დემოს მოთხოვნა</a>
+                <a href="#contact" class="btn btn-primary">დემოს მოთხოვნა</a>
             </div>
-            <div class="pricing-card fade-in">
-                <div class="pricing-name">ენტერპრაიზი</div>
-                <div class="pricing-desc">მსხვილი ორგანიზაციისთვის</div>
-                <div class="pricing-price">შეთანხმებით</div>
-                <div class="pricing-period">ინდივიდუალური პირობები</div>
-                <ul class="pricing-features">
-                    <li>უსაზღვრო აქტივები</li>
-                    <li>უსაზღვრო მომხმარებლები</li>
-                    <li>Custom მოდულები</li>
-                    <li>White-label ვერსია</li>
-                    <li>On-site დანერგვა + ტრენინგი</li>
-                    <li>24/7 მხარდაჭერა</li>
-                    <li>SLA გარანტია</li>
+            <div class="plan">
+                <h3>ენტერპრაიზი</h3>
+                <div class="for">მსხვილი ორგანიზაციისა და ჰოსპიტლისთვის</div>
+                <div class="price text">შეთანხმებით</div>
+                <div class="yearly">ინდივიდუალური პირობები</div>
+                <ul>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>უსაზღვრო აქტივები და მომხმარებლები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>სრული პლატფორმა — 25 მოდული</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>ORIS 5 ფინანსური ანგარიშგება, ბიუჯეტი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>სამედიცინო მოდულები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>Custom მოდულები და ინტეგრაციები</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>On-site დანერგვა + ტრენინგი</span></li>
+                    <li><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg><span>SLA გარანტია</span></li>
                 </ul>
-                <a href="#contact" class="btn btn-secondary pricing-btn">დაგვიკავშირდით</a>
+                <a href="#contact" class="btn btn-ghost">დაგვიკავშირდით</a>
             </div>
         </div>
+        <p class="pricing-note">ფასები მითითებულია დღგ-ის გარეშე. დანერგვის და მონაცემების მიგრაციის პირობები დაზუსტდება დემოს შემდეგ.</p>
     </div>
 </section>
 
 <!-- ====== FAQ ====== -->
-<section id="faq">
-    <div class="section-inner">
-        <div class="section-header fade-in">
-            <div class="section-label">❓ FAQ</div>
-            <h2 class="section-title">ხშირად დასმული კითხვები</h2>
+<section class="section" id="faq">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="kicker">FAQ</span>
+            <h2 class="h2">ხშირად დასმული კითხვები</h2>
         </div>
-        <div class="faq-list">
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    რამდენი დრო სჭირდება დანერგვას?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        სტანდარტული დანერგვა 2-3 სამუშაო დღეში ხდება. ეს მოიცავს სისტემის ინსტალაციას, მონაცემების იმპორტს Excel-იდან და გუნდის საბაზისო ტრენინგს. ენტერპრაიზ ვერსიისთვის — 1-2 კვირა, რაც მოიცავს ინდივიდუალურ კონფიგურაციას.
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    შესაძლებელია არსებული მონაცემების გადმოტანა?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        დიახ, სისტემა მხარს უჭერს მასობრივ იმპორტს Excel ფაილებიდან. ჩვენ დაგეხმარებით მონაცემების სწორად სტრუქტურირებაში და მიგრაციაში. ვალიდაცია და დუბლიკატების ფილტრაცია ავტომატურად ხდება.
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    ინტერნეტი საჭიროა სისტემის მუშაობისთვის?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        არა. AssetFlow Studio ეშვება თქვენს ლოკალურ სერვერზე (On-Premise). ინტერნეტთან კავშირი არ არის აუცილებელი — სისტემა სრულად ფუნქციონირებს შიდა ქსელში. ეს ასევე ნიშნავს, რომ თქვენი მონაცემები მხოლოდ თქვენთან რჩება.
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    რა ტექნიკური მოთხოვნებია?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        სერვერი: Windows Server + SQL Server (ან Linux). კლიენტი: ნებისმიერი თანამედროვე ბრაუზერი (Chrome, Edge, Firefox). სპეციალური პროგრამის ინსტალაცია კლიენტის მხარეს არ არის საჭირო — ყველაფერი ბრაუზერში მუშაობს.
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    რა ხდება საცდელი პერიოდის შემდეგ?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        14 დღის საცდელი პერიოდი სრულიად უფასოა. ამ პერიოდში სისტემის ყველა ფუნქცია ხელმისაწვდომია. საცდელი პერიოდის შემდეგ თქვენ ირჩევთ შესაფერის გეგმას. თუ სისტემა არ მოგეწონათ — არანაირი ვალდებულება.
-                    </div>
-                </div>
-            </div>
-            <div class="faq-item fade-in">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                    რამდენ მომხმარებელს შეუძლია ერთდროულად მუშაობა?
-                    <span class="faq-chevron">▼</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        სტარტერ გეგმა 3 მომხმარებელს, პროფესიონალი — 10 მომხმარებელს მხარს უჭერს. ენტერპრაიზ ვერსია ულიმიტოა. ყველა მომხმარებელს აქვს RBAC-ით განსაზღვრული ინდივიდუალური წვდომის უფლებები.
-                    </div>
-                </div>
-            </div>
+        <div class="faq reveal">
+            <details>
+                <summary>რამდენი დრო სჭირდება დანერგვას?</summary>
+                <div class="answer">ბაზისური პაკეტის დანერგვა 2–3 სამუშაო დღეში ხდება: ინსტალაცია, მონაცემების იმპორტი Excel-იდან და გუნდის საბაზისო ტრენინგი. ენტერპრაიზ ვერსია ინდივიდუალური გეგმით ინერგება — მოდულების რაოდენობისა და ინტეგრაციების მიხედვით.</div>
+            </details>
+            <details>
+                <summary>სისტემა მხოლოდ სამედიცინო ორგანიზაციებისთვისაა?</summary>
+                <div class="answer">არა. აქტივების, ფინანსების, საწყობის, შეკვეთების, HR-ის, დოკუმენტების და CRM-ის მოდულები ნებისმიერი ორგანიზაციისთვისაა. სამედიცინო მოდულები დამატებითია და ირთვება მხოლოდ საჭიროების შემთხვევაში.</div>
+            </details>
+            <details>
+                <summary>შეიძლება მხოლოდ საჭირო მოდულების ჩართვა?</summary>
+                <div class="answer">დიახ. მოდულები ირთვება და ითიშება მონაცემების წაშლის გარეშე. გამორთული მოდულის API დახურულია, ბირთვი კი გამორთვისგან დაცულია — უკან ჩართვის გზა ყოველთვის რჩება.</div>
+            </details>
+            <details>
+                <summary>როგორ მუშაობს ORIS 5-თან ინტეგრაცია?</summary>
+                <div class="answer">სისტემა ORIS 5-დან კითხულობს ბუღალტრულ ნაშთებს, გატარებებს და მომწოდებლებს და ინახავს სნეპშოტებად — განრიგით ან ხელით განახლებით. ძვირი აგრეგაცია ერთხელ ითვლება, ამიტომ რეპორტები 80–500 მილიწამში იხსნება. ხელით შეტანილი შესწორებები სინქრონიზაციისას არ გადაიწერება.</div>
+            </details>
+            <details>
+                <summary>შესაძლებელია არსებული მონაცემების გადმოტანა?</summary>
+                <div class="answer">დიახ. სისტემა მხარს უჭერს მასობრივ იმპორტს Excel-იდან (შაბლონით, ავტო-ვალიდაციით და დუბლიკატების შემოწმებით) და PDF ზედდებულიდან. ჩვენ დაგეხმარებით მონაცემების სწორად სტრუქტურირებაში.</div>
+            </details>
+            <details>
+                <summary>ინტერნეტი საჭიროა სისტემის მუშაობისთვის?</summary>
+                <div class="answer">არა. AssetFlow Studio ეშვება თქვენს ლოკალურ სერვერზე (on-premise) და სრულად ფუნქციონირებს შიდა ქსელში. ინტერნეტი სჭირდება მხოლოდ გარე სერვისებს — მაგალითად, ეროვნული ბანკის კურსებს; კავშირის გარეშე სისტემა ბოლო ცნობილ კურსს იყენებს.</div>
+            </details>
+            <details>
+                <summary>რა ტექნიკური მოთხოვნებია?</summary>
+                <div class="answer">სერვერი: Windows Server (ან Linux) + SQL Server 2019+, .NET 8. კლიენტი: ნებისმიერი თანამედროვე ბრაუზერი (Chrome, Edge, Firefox, Safari). კლიენტის მხარეს ინსტალაცია არ არის საჭირო.</div>
+            </details>
+            <details>
+                <summary>რა ენებზეა ხელმისაწვდომი?</summary>
+                <div class="answer">ქართულად და ინგლისურად. თარგმანები ინახება ბაზაში და რედაქტირდება პროგრამისტის გარეშე; ახალი ენის დამატება ცხრილში ერთი ჩანაწერია.</div>
+            </details>
+            <details>
+                <summary>რამდენ მომხმარებელს შეუძლია ერთდროულად მუშაობა?</summary>
+                <div class="answer">სტარტერი — 3 მომხმარებელი, პროფესიონალი — 10, ენტერპრაიზი — შეუზღუდავი. თითოეულ მომხმარებელს RBAC-ით განსაზღვრული ინდივიდუალური უფლებები აქვს.</div>
+            </details>
+            <details>
+                <summary>რა ხდება საცდელი პერიოდის შემდეგ?</summary>
+                <div class="answer">14-დღიანი საცდელი პერიოდი სრულიად უფასოა და ყველა ფუნქცია ხელმისაწვდომია. შემდეგ ირჩევთ შესაფერის გეგმას; თუ სისტემა არ მოგეწონათ — არანაირი ვალდებულება.</div>
+            </details>
         </div>
     </div>
 </section>
 
-<!-- ====== CTA / CONTACT ====== -->
-<section class="cta-section" id="contact">
-    <div class="section-inner">
-        <div class="cta-box fade-in">
-            <div class="section-label">🎯 შემდეგი ნაბიჯი</div>
-            <h2>მოითხოვეთ უფასო დემო</h2>
-            <p>
-                15 წუთიან დემოში ნახავთ, როგორ გადაჭრის AssetFlow Studio თქვენს კონკრეტულ გამოწვევებს. არანაირი ვალდებულება.
-            </p>
-            <div class="cta-actions">
-                <a href="tel:+995595048283" class="btn btn-primary">📞 დაგვირეკეთ</a>
-                <a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener" class="btn btn-secondary">💬 Facebook</a>
-            </div>
-            <div class="cta-contact-info">
-                <div class="cta-contact-item">
-                    📧 <a href="mailto:info@assetflow.ge">Assetsflowstudio@gmail.com</a>
+<!-- ====== CONTACT ====== -->
+<section class="section contact" id="contact">
+    <div class="container contact-grid">
+        <div class="contact-info reveal">
+            <span class="kicker">შემდეგი ნაბიჯი</span>
+            <h2 class="h2">მოითხოვეთ უფასო დემო</h2>
+            <p class="lead">15-წუთიან დემოში ნახავთ, როგორ გადაჭრის AssetFlow Studio თქვენს კონკრეტულ გამოწვევებს. არანაირი ვალდებულება.</p>
+            <ul class="contact-list">
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#phone"/></svg></span><div><small>ტელეფონი</small><a href="tel:+995595048283">+995 595 04 82 83</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg></span><div><small>ელ-ფოსტა</small><a href="mailto:assetsflowstudio@gmail.com">assetsflowstudio@gmail.com</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#facebook"/></svg></span><div><small>Facebook</small><a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener">AssetFlow Studio</a></div></li>
+                <li><span class="ic"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#map-pin"/></svg></span><div><small>მისამართი</small>თბილისი, საქართველო</div></li>
+            </ul>
+        </div>
+
+        <div class="form-card reveal">
+            <h3>დემოს მოთხოვნა</h3>
+            <p>შეავსეთ ფორმა და დაგიკავშირდებით 1 სამუშაო დღეში.</p>
+            <form id="demoForm" name="demo-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field"
+                  data-ok="მადლობა! თქვენი მოთხოვნა მიღებულია — მალე დაგიკავშირდებით."
+                  data-err="გაგზავნა ვერ მოხერხდა. გთხოვთ, დაგვირეკოთ ან მოგვწეროთ ელ-ფოსტაზე.">
+                <input type="hidden" name="form-name" value="demo-request">
+                <input type="hidden" name="language" value="ka">
+                <p class="hp"><label>არ შეავსოთ: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+                <div class="form-grid">
+                    <div class="field"><label for="f-name">სახელი და გვარი <span class="req" aria-hidden="true">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+                    <div class="field"><label for="f-org">ორგანიზაცია <span class="req" aria-hidden="true">*</span></label><input id="f-org" name="organization" type="text" autocomplete="organization" required></div>
+                    <div class="field"><label for="f-email">ელ-ფოსტა <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+                    <div class="field"><label for="f-phone">ტელეფონი</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+                    <div class="field"><label for="f-type">ორგანიზაციის ტიპი</label>
+                        <select id="f-type" name="org_type">
+                            <option value="">— აირჩიეთ —</option>
+                            <option>ჰოსპიტალი / კლინიკა</option>
+                            <option>კომერციული კომპანია</option>
+                            <option>საჯარო სექტორი</option>
+                            <option>სხვა</option>
+                        </select>
+                    </div>
+                    <div class="field"><label for="f-interest">რა გაინტერესებთ?</label>
+                        <select id="f-interest" name="interest">
+                            <option value="">— აირჩიეთ —</option>
+                            <option>სრული პლატფორმა</option>
+                            <option>ფინანსები და ანგარიშგება</option>
+                            <option>სამედიცინო მოდულები</option>
+                            <option>აქტივები და ინვენტარიზაცია</option>
+                            <option>HR, CRM, კომუნიკაცია</option>
+                        </select>
+                    </div>
+                    <div class="field full"><label for="f-msg">შეტყობინება</label><textarea id="f-msg" name="message" placeholder="მოკლედ აღწერეთ თქვენი საჭიროება"></textarea></div>
+                    <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>ვეთანხმები ჩემი მონაცემების დამუშავებას დემოს ორგანიზებისთვის <a href="/privacy.html">კონფიდენციალურობის პოლიტიკის</a> შესაბამისად. <span class="req" aria-hidden="true">*</span></span></label>
                 </div>
-                <div class="cta-contact-item">
-                    📞 <a href="tel:+995XXXXXXXXX">+995 595048283</a>
-                </div>
-                <div class="cta-contact-item">
-                    📍 თბილისი, საქართველო
-                </div>
-            </div>
+                <button type="submit" class="btn btn-primary">მოთხოვნის გაგზავნა <svg class="i" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></button>
+                <div id="formStatus" class="form-status" role="status" tabindex="-1"></div>
+            </form>
         </div>
     </div>
 </section>
 
-<!-- ====== TECH STRIP ====== -->
-<div class="tech-strip">
-    <div class="tech-strip-inner">
-        <p>აგებულია თანამედროვე, საიმედო ტექნოლოგიებზე</p>
-        <div class="tech-tags">
-            <span class="tech-tag">React 19</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">.NET Core 8</span>
-            <span class="tech-tag">SQL Server</span>
-            <span class="tech-tag">REST API</span>
-            <span class="tech-tag">JWT</span>
-            <span class="tech-tag">TailwindCSS</span>
-        </div>
-    </div>
-</div>
+</main>
 
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
-    <div class="footer-inner">
-        <div class="footer-copy">© 2026 AssetFlow Studio. ყველა უფლება დაცულია.</div>
-        <div class="footer-links">
-            <a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener">Facebook</a>
-            <a href="#contact">კონტაქტი</a>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a href="/" class="logo"><img src="/favicon.svg" alt="" width="34" height="34"><span>AssetFlow <em>Studio</em></span></a>
+                <p>მოდულური ERP პლატფორმა ფინანსების, სამედიცინო ოპერაციების, აქტივების და გუნდის მართვისთვის.</p>
+            </div>
+            <div>
+                <h4>პროდუქტი</h4>
+                <ul><li><a href="#platform">მოდულები</a></li><li><a href="#features">შესაძლებლობები</a></li><li><a href="#screens">ინტერფეისი</a></li><li><a href="#whats-new">სიახლეები</a></li></ul>
+            </div>
+            <div>
+                <h4>კომპანია</h4>
+                <ul><li><a href="#pricing">ფასები</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">კონტაქტი</a></li><li><a href="/privacy.html">კონფიდენციალურობა</a></li></ul>
+            </div>
+            <div>
+                <h4>კავშირი</h4>
+                <ul><li><a href="tel:+995595048283">+995 595 04 82 83</a></li><li><a href="mailto:assetsflowstudio@gmail.com">ელ-ფოსტა</a></li><li><a href="https://www.facebook.com/profile.php?id=61577590663221" target="_blank" rel="noopener">Facebook</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> AssetFlow Studio. ყველა უფლება დაცულია.</span>
+            <span class="tech-line" aria-label="ტექნოლოგიები"><span>React 19</span><span>TypeScript</span><span>.NET 8</span><span>SQL Server</span></span>
         </div>
     </div>
 </footer>
 
 <!-- ====== LIGHTBOX ====== -->
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
-    <img id="lightboxImg" src="" alt="">
-    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
-</div>
-
-<script>
-// ========== SCREENSHOT DATA ==========
-const screenshots = [
-    { src: 'images/dashboard.png', title: 'დეშბორდი', desc: 'მთავარი პანელი რეალურ დროში სტატისტიკით', category: 'main' },
-    { src: 'images/assets.png', title: 'აქტივების სია', desc: 'სრული სია ფილტრებით და ძიებით', category: 'main' },
-    { src: 'images/asset-form.png', title: 'აქტივის დამატება', desc: '7-სექციანი დეტალური ფორმა', category: 'main' },
-    { src: 'images/inventory.png', title: 'ინვენტარიზაცია', desc: 'ბარკოდ სკანერით ავტომატური აღრიცხვა', category: 'ops' },
-    { src: 'images/depreciation.png', title: 'ამორტიზაციის ისტორია', desc: 'ავტომატური გაანგარიშება და ისტორია', category: 'ops' },
-    { src: 'images/orders.png', title: 'შეკვეთების მართვა', desc: 'სრული Workflow სისტემა', category: 'ops' },
-    { src: 'images/order-details.png', title: 'შეკვეთის დეტალები', desc: 'ტაბები, დოკუმენტები, კომენტარები', category: 'ops' },
-    { src: 'images/leads.png', title: 'ლიდების მართვა', desc: 'CRM მოდული აგენტებისთვის', category: 'ops' },
-    { src: 'images/warehouse.png', title: 'საწყობის მარაგები', desc: 'რეალურ დროში მარაგის მონიტორინგი', category: 'ops' },
-    { src: 'images/movements.png', title: 'მარაგების მოძრაობა', desc: 'შემოსვლა, გასვლა, გადატანა', category: 'ops' },
-    { src: 'images/roles.png', title: 'როლების მართვა', desc: 'RBAC უსაფრთხოების სისტემა', category: 'admin' },
-    { src: 'images/permissions.png', title: 'უფლებების მართვა', desc: 'გრანულარული წვდომის კონტროლი', category: 'admin' },
-    { src: 'images/reports.png', title: 'ანგარიშგება', desc: 'მრავალფეროვანი რეპორტები', category: 'admin' },
-    { src: 'images/reports2.png', title: 'დეტალური რეპორტები', desc: 'Excel და PDF ექსპორტი', category: 'admin' }
-];
-
-let currentFilter = 'all';
-let currentLightboxIndex = 0;
-let filteredScreenshots = [...screenshots];
-
-// ========== RENDER SCREENSHOTS ==========
-function renderScreenshots() {
-    const grid = document.getElementById('screenshotsGrid');
-    filteredScreenshots = currentFilter === 'all' 
-        ? screenshots 
-        : screenshots.filter(s => s.category === currentFilter);
-    
-    grid.innerHTML = filteredScreenshots.map((s, i) => `
-        <div class="screenshot-card" onclick="openLightbox(${i})">
-            <img src="${s.src}" alt="${s.title}" loading="lazy">
-            <div class="screenshot-info">
-                <h4>${s.title}</h4>
-                <span>${s.desc}</span>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Filter buttons
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        renderScreenshots();
-    });
-});
-
-renderScreenshots();
-
-// ========== LIGHTBOX ==========
-function openLightbox(index) {
-    currentLightboxIndex = index;
-    const lb = document.getElementById('lightbox');
-    document.getElementById('lightboxImg').src = filteredScreenshots[index].src;
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-function navigateLightbox(dir) {
-    currentLightboxIndex = (currentLightboxIndex + dir + filteredScreenshots.length) % filteredScreenshots.length;
-    document.getElementById('lightboxImg').src = filteredScreenshots[currentLightboxIndex].src;
-}
-
-document.getElementById('lightbox').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeLightbox();
-});
-
-document.addEventListener('keydown', (e) => {
-    if (!document.getElementById('lightbox').classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') navigateLightbox(-1);
-    if (e.key === 'ArrowRight') navigateLightbox(1);
-});
-
-// ========== NAV SCROLL ==========
-window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// ========== FADE IN ANIMATION ==========
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
+<dialog class="lightbox" id="lightbox" aria-label="ეკრანის გადიდებული ხედი">
+    <figure>
+        <img id="lbImg" alt="">
+        <figcaption><strong id="lbTitle"></strong><span id="lbDesc"></span></figcaption>
+    </figure>
+    <button class="lb-btn lb-close" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#x"/></svg><span class="sr-only">დახურვა</span></button>
+    <button class="lb-btn lb-prev" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#chevron-left"/></svg><span class="sr-only">წინა</span></button>
+    <button class="lb-btn lb-next" type="button"><svg class="i" aria-hidden="true"><use href="/assets/icons.svg#chevron-right"/></svg><span class="sr-only">შემდეგი</span></button>
+</dialog>
 
 </body>
 </html>
